@@ -1,11 +1,3 @@
 *.pyc 
 
 db.sqlite3
-
-settings.py
-
-.DS_Store
-
-*.json
-
-*.csv

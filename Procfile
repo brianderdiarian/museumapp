@@ -1,0 +1,1 @@
+web: gunicorn museum_project.wsgi --log-file -

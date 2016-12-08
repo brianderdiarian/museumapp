@@ -1,0 +1,13 @@
+{{ object.artist|safe }}
+{{ object.artist_sans_accents|safe }}
+{{ object.title|safe }}
+{{ object.title_sans_accents|safe }}
+{{ object.date }}
+{{ object.medium }}
+{{ object.description }}
+{{ object.collection }}
+{{ object.timestamp }}
+{{ object.sex }}
+{{ object.nationality }}
+{{ object.descriptors }}
+{{ object.movements|safe }}

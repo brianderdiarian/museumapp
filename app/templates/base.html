@@ -1,0 +1,102 @@
+{% load bootstrap3 %}
+
+<!DOCTYPE html>
+<html lang="eng">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compativle" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>artnewgo</title>
+
+		{% bootstrap_css %}
+		{% bootstrap_javascript %}
+		{% load static %}
+
+		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		
+		<body style="background: url(http://www.moma.org/media/W1siZiIsIjMzOTExNiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDEwMjR4MTAyNFx1MDAzZSJdXQ.jpg?sha=94a84fac9d759655); background-size:100000px; background-position:center; padding-bottom: 50px;">
+		
+		<style>
+		</style>
+
+	</head>
+	<body bgcolor="#E6E6FA">
+
+		<nav class="navbar navbar-inverse topnavbar">
+		  	<div class="container-fluid">
+		    	<div class="navbar-header">
+		      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		        		<span class="icon-bar"></span>
+		      		</button>
+		      		<a class="navbar-brand" href="{% url 'app:index' %}">art<b>new</b>go</a>
+		    	</div>
+        		<div class="collapse navbar-collapse" id="myNavbar">
+            		<ul class="nav navbar-nav">
+                		<li class="active"><a href="#">About</a></li>
+                		<li>
+                    		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Collections<b class="caret"></b></a>
+                			<ul class="dropdown-menu">
+                    			<li><a href="/search/?q=MoMA">MoMA</a></li>
+                    			<li><a href="/search/?q=Met">The Met</a></li>
+                    			<li><a href="/search/?q=Brooklyn Museum">Brooklyn Museum</a></li>
+                    			<li><a href="/search/?q=Guggenheim">Solomon R Guggenheim</a></li>
+                			</ul>
+                		</li>				
+
+						<li>
+                    		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Movements<b class="caret"></b></a>
+                    		<ul class="dropdown-menu">
+                        		
+                        		<li>
+                        			{% for movement in mlist %}
+                            		<a href="/search/?q={{ movement }}">{{ movement }}</a>
+                        			{% endfor %}
+                        		</li>
+                        
+
+                			</ul>
+						</li>
+						<li>
+                    		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Artists<b class="caret"></b></a>
+                    		<ul class="dropdown-menu">
+                        		
+                        		<li>
+                        			{% for artist in artistlist %}
+                            		<a href="/search/?q={{ artist.artist }}">{{ artist.artist|truncatechars:30 }}</a>
+                        			{% endfor %}
+                        		</li>
+                        
+
+                			</ul>
+						</li>
+						<li><a href="/women">Women Artists</a></li>
+        			</ul>
+        		</div><!--/.nav-collapse -->
+
+			</div>
+		</nav>
+
+			<div class="container">
+
+				<div class="page-header">
+				
+
+					{% block header %}
+					{% endblock header %}
+
+				</div>
+				<div class="main-content">
+
+				{% block content %}
+				{% endblock content %}
+
+				</div>
+
+			</div> <!-- /container -->
+
+	</body>
+</html>

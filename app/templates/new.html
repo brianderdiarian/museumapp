@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <form action="/search/" method="get">
+        <input type="text" name="q">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+    <br>
+{% if today %}
+
+{% for artwork in today %}
+{% if artwork.accession_number not in yesterday %}
+
+<div class="thumbnail">
+                        
+                             <a href ="{{artwork.pageurl}}" target="blank">
+                                <img src="{{artwork.imageurl}}" style="border:1px solid gray;">
+                            
+                                <div class="caption">
+                                    <h3>{{artwork.artist}}</h3>
+                                    <span class="thumb_body">
+                                        <p>
+                                        <i>{{artwork.title|truncatechars:45}}</i></p><p>
+                                        {{artwork.date}}</p><p>
+                                        {{artwork.medium|truncatechars:45}}</p>
+                                        <div class="onviewloc"><p>
+                                        {{artwork.collection}}
+                                        </p></div>
+                                    </span>
+                                </div>
+                            </a>
+                       
+                    </div>
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<!-- {% for movement in allmovements %}
+    <p>{{ movement }}</p>
+{% endfor %} -->
+
+{% endblock content %}

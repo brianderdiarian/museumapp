@@ -44,11 +44,11 @@ class MomaSpider(Spider):
             yield scrapy.Request(full_url, callback=self.parse_artwork)
 
     def parse_artwork(self, response):
-        if response.xpath('/html/body/div[3]/div[1]/div[2]/div[2]/h3/text()').extract()[0].strip() == "":
-            artist = "Unknown"
-            artist_sans_accents = "Unknown"
-        else:
+        try:
             artist = response.xpath('/html/body/div[3]/div[1]/div[2]/div[2]/h3/text()').extract()[0].strip()
+            artist_sans_accents = remove_accents(artist)
+        except:
+            artist = response.xpath('/html/body/div[3]/div[1]/div[2]/div[6]/a/text()').extract()[0].strip()
             artist_sans_accents = remove_accents(artist)
 
         title = response.xpath('/html/body/div[3]/div[1]/div[2]/div[1]/h1/text()').extract()[0].strip()

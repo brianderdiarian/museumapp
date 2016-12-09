@@ -41,7 +41,7 @@ class MetSpider(Spider):
 
         for result in results:
 
-            if result['description'] == "":
+            if result['description'] == " ":
                 artist = "Unknown"
                 artist_sans_accents = "Unknown"
             else:    

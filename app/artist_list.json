@@ -2505,8 +2505,8 @@
      "Artist":"Diego Rivera"
     ,"Born":"1886"
     ,"Died":"1957"
-    ,"Movement(s)":"Modern Art, Muralist"
-    ,"Descriptors":"Painter"
+    ,"Movement(s)":"Modern Art"
+    ,"Descriptors":"Painter, Muralist"
     ,"Sex":"Male"
     ,"Nationality":"Mexican"
   },
@@ -5457,7 +5457,7 @@
      "Artist":"Jan Martel"
     ,"Born":"1896"
     ,"Died":"1966"
-    ,"Movement(s)":"Art Deco, Cubist"
+    ,"Movement(s)":"Art Deco, Cubism"
     ,"Descriptors":"Sculptor"
     ,"Sex":"Male"
     ,"Nationality":"French"
@@ -5619,7 +5619,7 @@
      "Artist":"Jean Metzinger"
     ,"Born":"1883"
     ,"Died":"1956"
-    ,"Movement(s)":"Modern Art, Cubism, Fauvist"
+    ,"Movement(s)":"Modern Art, Cubism, Fauvism"
     ,"Descriptors":"Painter"
     ,"Sex":"Male"
     ,"Nationality":"French"
@@ -16990,4 +16990,1129 @@
     ,"Descriptors":"Sculptor"
     ,"Sex":"Male"
     ,"Nationality":"British"
+  },
+  {
+     "Artist":"Raphael Soyer"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Willard Leroy Metcalf"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Arthur Parton"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Frederick Arthur Bridgman"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Harry C. Edwards"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Albert Herter"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Asher B. Durand"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"David Gilmour Blythe"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Daniel Ridgway Knight"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"George Wesley Bellows"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Winckworth Allan Gay"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Hiram S. Powers"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Frederick Childe Hassam"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"George Copeland Ault"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Marguerite Thompson Zorach"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Elizabeth Boott Duveneck"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Carl E. Akeley"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Malvina Hoffman"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Joseph Rusling Meeker"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Richard Saltonstall Greenough"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Paul Kelpe"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Mary Shepard Greene Blumenschein"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Maurice Kish"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Jacques Lipchitz"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Morston Constantine Ream"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"John B. Flannagan"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Alma Hirsig Bliss"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Elsie Dodge Pattee"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Eda Nemoede Casterton"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Bertram Hartman"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Eldzier Cortor"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Harry Roseland"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Mahonri M. Young"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"John Biggers"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Elie Nadelman"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Conrad Wise Chapman"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Robert Laurent"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Nancy Elizabeth Prophet"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Arthur Quartley"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Warren Wheelock"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Oscar Miestchaninoff"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"George Henry Hall"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Georg J. Lober"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Victor David Brenner"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Julio Kilenyi"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Bela Lyon Pratt"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Bolton Coit Brown"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Sarah Malcolm Freeborn"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Solon H. Borglum"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"William R. O' Donovan"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Fritz Hammargren"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Henry Varnum Poor"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Francis Augustus Silva"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Jerome Thompson"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Donal Hord"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Henry Mitchell"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Frederick Sackrider Remington"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Margaret Foley"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Waldemar Rannus"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Enrico Glicenstein"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"John Mackie Falconer"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Emma Stebbins"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"C. N. Pike"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":""
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Platt Powell Ryder"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Bernard Walsh"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Mabel R. Welch"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Alexandrina Robertson Harris"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Lois Mailou Jones"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Alexander Helwig Wyant"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Robert Crannel Minor"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Alfeo Faggi"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"John Koch"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Concetta Scaravaglione"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Max Bachmann"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Mary Coleman Allen"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Margaret Foote Hawley"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Mary McMillan"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"William J. Whittemore"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Grace H. Murray"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Maria Judson Strean"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Katherine Smith Myrick"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Annie Hurlburt Jackson"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"W. Sherman Potts"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Clara Louise Bell"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Sarah Eakin Cowan"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Pamela Vinton Brown Ravenel"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Carl Weidner"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Walter Libbey"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Aaron Draper Shattuck"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Saul Baizerman"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Maurice Stern"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Grafton Tyler Brown"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"John G. Taggart"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"George Biddle"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Nena de Brennecke"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Ilya Bolotowsky"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Albert Swinden"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Sanford Biggers"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Laura Ziegler"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Steven Lang"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Hank Willis Thomas"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Kurt Seligmann"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Kehinde Wiley"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Theaster Gates"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Steffani Jemison"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Alison Elizabeth Taylor"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Titus Kaphar"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Arlene Shechet"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Joseph Kosuth"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Randy Rodriguez aka Kel 1st"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Torrick Ablack aka Toxic"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Leonardo Drew"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Deana Lawson"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Howard Mallory"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Gary Simmons"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Philip Pearlstein"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Terence Koh"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Shinique Smith"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"El Anatsui"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Nancy Fried"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"John Ahearn"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Ernest Crichlow"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Yinka Shonibare MBE"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Fred Wilson"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Male"
+    ,"Nationality":""
+  },
+  {
+     "Artist":"Mickalene Thomas"
+    ,"Born":""
+    ,"Died":""
+    ,"Movement(s)":""
+    ,"Descriptors":""
+    ,"Sex":"Female"
+    ,"Nationality":""
   }]

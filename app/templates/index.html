@@ -10,31 +10,25 @@
     <br>
     <br>
 {% if artists %}
-
-{% for artist in artists %}
-<div class="thumbnail">
-                        
-         <a href ="{{artist.pageurl}}" target="blank">
-            <img src="{{artist.imageurl}}" style="border:1px solid gray;">
-        
-            <div class="caption">
-                <h3>{{artist.artist}}</h3>
-                <span class="thumb_body">
-                    <p>
-                    <i>{{artist.title|truncatechars:45}}</i></p><p>
-                    {{artist.date}}</p><p>
-                    {{artist.medium|truncatechars:45}}</p>
-                    <div class="onviewloc"><p>
-                    {{artist.collection}}
-                    </p></div>
-                </span>
-            </div>
-        </a>
-   
-</div>
-
-
-{% endfor %}
+    {% for artist in artists %}
+        <div class="thumbnail">
+            <a href ="{{artist.pageurl}}" target="blank">
+                <img src="{{artist.imageurl}}" style="border:1px solid gray;">
+                <div class="caption">
+                    <h3>{{artist.artist}}</h3>
+                    <span class="thumb_body">
+                        <p>
+                        <i>{{artist.title|truncatechars:45}}</i></p><p>
+                        {{artist.date}}</p><p>
+                        {{artist.medium|truncatechars:45}}</p>
+                        <div class="onviewloc"><p>
+                        {{artist.collection}}
+                        </p></div>
+                    </span>
+                </div>
+            </a>
+        </div>   
+    {% endfor %}
 {% endif %}
 
 

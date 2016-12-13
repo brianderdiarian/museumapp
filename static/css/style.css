@@ -12,16 +12,23 @@ body {
 }
 
 .thumbnail {
-	background-color: rgba(255,255,255,0.7);
+	/*background-color: rgba(255,255,255,0.7);*/
 	width: 240px;
 	height: 580px;
-	margin: 0;
 	border: none;
 	padding:30px;
-	float:left;
+    padding-top: 40px;
+	float: left;
 	display: inline-block;
+    *display: inline;
 	margin: 20px 20px 20px 20px;
 	border-radius: 10px;
+    text-align: left;
+    background: rgba(255,255,255,0.7); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(white, rgba(255,255,255,0.5)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(white, rgba(255,255,255,0.5)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(white, rgba(255,255,255,0.5)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(white, rgba(255,255,255,0.5)); /* Standard syntax */
 }
 
 .thumbnail img {
@@ -170,7 +177,7 @@ input[type=text]:focus {
 .navbar-inverse .navbar-brand {
     color: #ff9156;
     font-size: 20px;
-    line-height: 18px;
+    line-height: 16px;
 }
 
 .navbar-inverse .navbar-toggle {

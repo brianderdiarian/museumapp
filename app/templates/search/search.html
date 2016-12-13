@@ -20,38 +20,43 @@
 
                     <div class="thumbnail">
                         
-                            <a href ="{{result.object.pageurl}}" target="blank">
-                                <img src="{{result.object.imageurl}}" style="border:1px solid gray;">
-                            
-                                <div class="caption">
-                                    <h3>{{result.object.artist}}</h3>
-                                    <span class="thumb_body">
-                                        <p>
-                                        <i>{{result.object.title|truncatechars:45}}</i></p><p>
-                                        {{result.object.date}}</p><p>
-                                        {{result.object.medium|truncatechars:45}}</p>
-                                        <div class="onviewloc"><p>
-                                        {{result.object.collection}}
-                                        </p></div>
-                                    </span>
-                                </div>
-                            </a>
+                        <a href ="{{result.object.pageurl}}" target="blank">
+                            <img src="{{result.object.imageurl}}" style="border:1px solid gray;">
+                        
+                            <div class="caption">
+                                <h3>{{result.object.artist}}</h3>
+                                <span class="thumb_body">
+                                    <p><i>{{result.object.title|truncatechars:45}}</i></p>
+                                    <p>{{result.object.date}}</p>
+                                    <p>{{result.object.medium|truncatechars:45}}</p>
+                                    <div class="onviewloc">
+                                        <p>{{result.object.collection}}</p>
+                                    </div>
+                                </span>
+                            </div>
+                        </a>
                        
                     </div>
                 
-
             {% empty %}
                 <div class="noresults"><h3>No results found.</h><div>
             {% endfor %}
             <div class="prevnext">
-            {% if page.has_previous %}
-                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}<button type="button" class="btn btn-default"><< Previous</button>{% if page.has_previous %}</a>{% endif %}
-            {% endif %}
-            {% if page.has_next %}
-                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}<button type="button" class="btn btn-default">Next >></button>{% if page.has_next %}</a>{% endif %}
-            {% endif %}
+                {% if page.has_previous %}
+                    {% if page.has_previous %}
+                        <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">
+                            <button type="button" class="btn btn-default"><< Previous</button>
+                        </a>
+                    {% endif %}
+                {% endif %}
+                {% if page.has_next %}
+                    {% if page.has_next %}
+                        <a href="?q={{ query }}&amp;page={{ page.next_page_number }}">
+                            <button type="button" class="btn btn-default">Next >></button>
+                        </a>
+                    {% endif %}
+                {% endif %}
             </div>
-        {% else %}
 
         {% endif %}
     </form>

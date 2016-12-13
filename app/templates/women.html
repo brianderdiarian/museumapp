@@ -15,42 +15,48 @@
 
 {% if femaleArtists %}
 
-{% for artist in femaleArtists %}
+    {% for artist in femaleArtists %}
 
-<div class="thumbnail">
-                        
-                             <a href ="{{artist.pageurl}}" target="blank">
-                                <img src="{{artist.imageurl}}" style="border:1px solid gray;">
-                            
-                                <div class="caption">
-                                    <h3>{{artist.artist}}</h3>
-                                    <span class="thumb_body">
-                                        <p>
-                                        <i>{{artist.title|truncatechars:45}}</i></p><p>
-                                        {{artist.date}}</p><p>
-                                        {{artist.medium|truncatechars:45}}</p>
-                                        <div class="onviewloc"><p>
-                                        {{artist.collection}}
-                                        </p></div>
-                                    </span>
-                                </div>
-                            </a>
-                       
-                    </div>
+        <div class="thumbnail">
+                                
+             <a href ="{{artist.pageurl}}" target="blank">
+                <img src="{{artist.imageurl}}" style="border:1px solid gray;">
+            
+                <div class="caption">
+                    <h3>{{artist.artist}}</h3>
+                    <span class="thumb_body">
+                        <p>
+                        <i>{{artist.title|truncatechars:45}}</i></p><p>
+                        {{artist.date}}</p><p>
+                        {{artist.medium|truncatechars:45}}</p>
+                        <div class="onviewloc"><p>
+                        {{artist.collection}}
+                        </p></div>
+                    </span>
+                </div>
+            </a>
+           
+        </div>
 
 
-{% endfor %}
-            <div class="prevnext">
+    {% endfor %}
+    <div class="prevnext">
+    {% if femaleArtists.has_previous %}
             {% if femaleArtists.has_previous %}
-                    {% if femaleArtists.has_previous %}<a href="?q={{ query }}&amp;page={{ femaleArtists.previous_page_number }}">{% endif %}<button type="button" class="btn btn-default"><< Previous</button>{% if femaleArtists.has_previous %}</a>{% endif %}
+                <a href="?q={{ query }}&amp;page={{ femaleArtists.previous_page_number }}">
+                    <button type="button" class="btn btn-default"><< Previous</button>
+                </a>
             {% endif %}
+    {% endif %}
+    {% if femaleArtists.has_next %}
             {% if femaleArtists.has_next %}
-                    {% if femaleArtists.has_next %}<a href="?q={{ query }}&amp;page={{ femaleArtists.next_page_number }}">{% endif %}<button type="button" class="btn btn-default">Next >></button>{% if femaleArtists.has_next %}</a>{% endif %}
+                <a href="?q={{ query }}&amp;page={{ femaleArtists.next_page_number }}">
+                    <button type="button" class="btn btn-default">Next >></button>
+                </a>
             {% endif %}
-            </div>
-        {% else %}
+    {% endif %}
+    </div>
+{% endif %}
 
-        {% endif %}
-    </form>
 
 {% endblock content %}

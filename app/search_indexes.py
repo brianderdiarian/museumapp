@@ -4,7 +4,7 @@ from app.models import Artwork
 
 class ArtworkIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    artist = indexes.CharField(model_attr='artist')
+    # artist = indexes.CharField(model_attr='artist')
     artist_sans_accents = indexes.CharField(model_attr='artist_sans_accents')
     title = indexes.CharField(model_attr='title')
     title_sans_accents = indexes.CharField(model_attr='title_sans_accents')

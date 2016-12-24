@@ -2,11 +2,13 @@ import scrapy
 import datetime
 import json
 import os
+import itertools
+import time
 
-
+from app.models import Artwork, Artist, Collection, NameVariant
 from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
-from museum_bot.items import ArtworkItem
+from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import strip_parenthesis
 from app.tools import remove_accents
 from w3lib.html import remove_tags
@@ -41,17 +43,24 @@ class MetSpider(Spider):
         for result in results:
 
             if result['description'] == " ":
-                artist = "Unknown"
-                artist_sans_accents = "Unknown"
+                artist = "Unknown Artist"
+                artist_sans_accents = "Unknown Artist"
+            elif result['description'] == "Unknown":
+                artist = "Unknown Artist"
+                artist_sans_accents = "Unknown Artist"
             else:    
                 artist = strip_parenthesis(result['description'].replace("&#39;","'")).strip()
                 artist_sans_accents = remove_accents(artist)
+                artist_sans_accents = artist_sans_accents.replace(',','')
          
             title = result['title'].replace("&#39;","'")
 
             title_sans_accents = remove_accents(title)
          
-            date = result['date']
+            try:
+                date = result['date']
+            except:
+                date = "Date Unknown"
          
             medium = result['medium']
          
@@ -62,11 +71,9 @@ class MetSpider(Spider):
             collection = remove_tags(result['galleryInformation'])
 
             if "Fifth" in collection:
-                address = "1000 5th Ave, New York, NY 10028"
-                coordinates = "40.7794° N, 73.9632° W"
+                collection = Collection.objects.get(collection_name__contains="Fifth")
             else:
-                address = "945 Madison Ave, New York, NY 10021"
-                coordinates = "40.7734° N, 73.9638° W"
+                collection = Collection.objects.get(collection_name__contains="Breuer")
          
             try:
                 if result['image'] == "/content/img/placeholders/NoImageAvailableIcon.png":
@@ -82,29 +89,35 @@ class MetSpider(Spider):
          
             timestamp = datetime.date.today().isoformat()
 
-            with open(os.path.join(BASE_DIR,'app/artist_list.json')) as json_data:
-                stats=json.load(json_data)
+            #artistlist = list(Artist.objects.values_list('artist_sans_accents', flat=True))
+            # for i, s in enumerate(artistlist):
+            #     artistlist[i] = s.split(',')
+            # artistlist = list(itertools.chain.from_iterable(artistlist))
 
-            for a in stats:
-                if artist_sans_accents in a['Artist']:
-                    sex = a['Sex']
-                    born = a['Born']
-                    died = a['Died']
-                    movements = a['Movement(s)']
-                    descriptors = a['Descriptors']
-                    nationality = a['Nationality']
-                    break
-                else:
-                    sex = ""
-                    born = ""
-                    died = ""
-                    movements = ""
-                    descriptors = ""
-                    nationality = ""
+            # artistlist = [x.strip(' ') for x in artistlist]
+                
+            # if any(artist_sans_accents == x for x in artistlist):
+            #     pass
+            # else:
+            #     yield ArtistItem(
+            #         artist_sans_accents=artist_sans_accents,
+            #     )
+
+            # artist = Artist.objects.get(artist_sans_accents__contains=artist_sans_accents)
+            try:
+                artist = NameVariant.objects.get(name=artist_sans_accents).artist
+            except:
+                try:
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                except:
+                    artist = artist_sans_accents
+                    yield ArtistItem(
+                        artist_sans_accents=artist_sans_accents,
+                    )
+                    time.sleep(2)
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents).earliest()
 
             yield ArtworkItem(
-                artist=artist,
-                artist_sans_accents=artist_sans_accents,
                 title=title,
                 title_sans_accents=title_sans_accents,
                 date=date,
@@ -112,16 +125,18 @@ class MetSpider(Spider):
                 description=description,
                 dimensions=dimensions,
                 collection=collection,
-                coordinates=coordinates,
                 imageurl=imageurl,
                 pageurl=pageurl,
                 accession_number=accession_number,
                 timestamp=timestamp,
-                address=address,
-                sex=sex,
-                born=born,
-                died=died,
-                movements=movements,
-                descriptors=descriptors,
-                nationality=nationality,
+                artist=artist,
+            )
+
+            from app.models import Artwork
+
+            artwork = Artwork.objects.get(accession_number=accession_number)
+
+            yield DisplayItem(
+                collection = collection,
+                artwork = artwork,
             )

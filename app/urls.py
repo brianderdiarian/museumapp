@@ -19,7 +19,7 @@ urlpatterns = [
 
 	url(r'^women/$', views.women, name='women'),
 
-	url(r'^test/$', views.test, name='test'),
+	# url(r'^test/$', views.test, name='test'),
 	
 	url(r'^search/$', search_view_factory(
 		view_class=SearchView, 

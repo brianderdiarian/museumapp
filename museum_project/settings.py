@@ -84,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-TEMPLATES[0]['OPTIONS']['context_processors'].append("app.context_processors.movement_processor")
+#TEMPLATES[0]['OPTIONS']['context_processors'].append("app.context_processors.movement_processor")
 
 WSGI_APPLICATION = 'museum_project.wsgi.application'
 

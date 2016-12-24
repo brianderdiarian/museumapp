@@ -7,6 +7,7 @@ from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
 from museum_bot.items import ArtworkItem
 from app.tools import remove_accents
+from app.models import Artwork
 
 class MomaSpider(Spider):
     name = "moma"
@@ -103,6 +104,8 @@ class MomaSpider(Spider):
                 descriptors = ""
                 nationality = ""
 
+
+        Artwork.objects.filter()
 
         yield ArtworkItem(
             artist=artist,

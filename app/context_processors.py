@@ -1,7 +1,7 @@
 from .models import Artwork
-from .tools import current, mlist, artistlist, artist_by_movement
+from .tools import current#, mlist, artistlist, artist_by_movement
 
-def movement_processor(request):
+#def movement_processor(request):
 	# movements = Artwork.objects.filter(timestamp=current).values_list("movements", flat=True)
 	# movements_list = list(movements)
 	# for i, s in enumerate(movements_list):
@@ -12,7 +12,7 @@ def movement_processor(request):
 	# allmovements = list(allmovements)
 
 
-	return {'mlist': mlist,
-			'artistlist': artistlist,
-			'artist_by_movement': artist_by_movement
-			}
+	#return {'mlist': mlist,
+			# 'artistlist': artistlist,
+			# 'artist_by_movement': artist_by_movement
+			#}

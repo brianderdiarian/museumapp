@@ -2,13 +2,14 @@ import scrapy
 import datetime
 import json
 import os
+import time
 
 from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
 from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import strip_parenthesis, cleanhtml
 from app.tools import remove_accents
-from app.models import Artist, Collection
+from app.models import Artwork, Artist, Collection, NameVariant
 
 class MetSpider(Spider):
     name = "nyguggenheim"

@@ -1,18 +1,14 @@
-from .models import Artwork
-from .tools import current#, mlist, artistlist, artist_by_movement
+from .models import Artwork, Movement, Artist
+from .tools import current, today#, mlist, artistlist, artist_by_movement
 
-#def movement_processor(request):
-	# movements = Artwork.objects.filter(timestamp=current).values_list("movements", flat=True)
-	# movements_list = list(movements)
-	# for i, s in enumerate(movements_list):
-	# 	movements_list[i] = s.split(',')
+def movement_processor(request):
+	movements = Movement.objects.filter(artist__artwork__display__end_date__gte=today).order_by('movement').distinct()
+	#movements = sorted(set(movements))
 
-	# final_list = sum(movements_list, [])
-	# allmovements = set(final_list)
-	# allmovements = list(allmovements)
+	artists = Artist.objects.filter(artwork__display__end_date__gte=today).exclude(artist_sans_accents__contains="Attributed").order_by('artist_sans_accents').distinct()
 
 
-	#return {'mlist': mlist,
-			# 'artistlist': artistlist,
+	return {'movements': movements,
+			'artists': artists,
 			# 'artist_by_movement': artist_by_movement
-			#}
+			}

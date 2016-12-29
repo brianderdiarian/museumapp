@@ -6,20 +6,22 @@ from haystack.forms import SearchForm
 from haystack.query import SearchQuerySet
 from . import views
 from haystack.views import SearchView, search_view_factory
-from .tools import current
+from .tools import current, today, yesterday
 from .forms import ArtSearchForm
 
-sqs = SearchQuerySet().filter(timestamp__gte=current)
+sqs = SearchQuerySet().filter(end_date__gte=today)
 
 urlpatterns = [
 	#homepage
 	url(r'^$', views.index, name='index'),
 
-	url(r'^new/$', views.new, name='new'),
+	# url(r'^new/$', views.new, name='new'),
 
 	url(r'^women/$', views.women, name='women'),
 
-	# url(r'^test/$', views.test, name='test'),
+	url(r'^movement/(?P<movement_id>[0-9]+)/$', views.movement, name='movement'),
+
+	url(r'^artist/(?P<artist_id>[0-9]+)/$', views.artist, name='artist'),
 	
 	url(r'^search/$', search_view_factory(
 		view_class=SearchView, 

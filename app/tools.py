@@ -31,7 +31,10 @@ def cleanhtml(raw_html):
 	return cleantext
 
 #show most recent results - yesterday to be safe that all indexes are complete
-#current = date.today() - timedelta(1)
+today = date.today()
+yesterday = (date.today() - timedelta(1))
+
+
 current = date.today()
 #current = "2016-11-18"
 

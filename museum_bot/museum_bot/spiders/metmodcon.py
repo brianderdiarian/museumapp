@@ -2,13 +2,14 @@ import scrapy
 import datetime
 import json
 import os
+import time
 
-
+from app.models import Artwork, Artist, Collection, NameVariant, Display
 from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
-from museum_bot.items import ArtworkItem
+from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import strip_parenthesis
-from app.tools import remove_accents
+from app.tools import remove_accents, yesterday, today
 from w3lib.html import remove_tags
 
 class MetSpider(Spider):
@@ -26,97 +27,107 @@ class MetSpider(Spider):
 
 
     def parse(self, response):
-        # Eliminate the [2] from response.xpath to search all works on page
-        #for href in response.xpath('//*[@id="works"]/div/div[2]/a/@href'):
+        global Artwork
+
         jsonresponse = json.loads(response.body_as_unicode())
 
         results = jsonresponse['results']
 
         for result in results:
 
-            if result['description'] == " ":
-                artist = "Unknown"
-                artist_sans_accents = "Unknown"
-            else:    
-                artist = strip_parenthesis(result['description'].replace("&#39;","'")).strip()
-                artist_sans_accents = remove_accents(artist)
-         
-            title = result['title'].replace("&#39;","'")
-
-            title_sans_accents = remove_accents(title)
-         
-            date = result['date']
-         
-            medium = result['medium']
-         
-            description = "None"
-         
-            dimensions = "None"
-         
-            collection = remove_tags(result['galleryInformation'])
-
-            if "Fifth" in collection:
-                address = "1000 5th Ave, New York, NY 10028"
-                coordinates = "40.7794° N, 73.9632° W"
-            else:
-                address = "945 Madison Ave, New York, NY 10021"
-                coordinates = "40.7734° N, 73.9638° W"
-         
-            try:
-                if result['image'] == "/content/img/placeholders/NoImageAvailableIcon.png":
-                    imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
-                else:
-                    imageurl = result['image']
-            except:
-                imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
-
-            pageurl = "http://www.metmuseum.org" + result['url']
-
             accession_number = "MET" + result['accessionNumber']
-         
-            timestamp = datetime.date.today().isoformat()
 
-            with open(os.path.join(BASE_DIR,'app/artist_list.json')) as json_data:
-                stats=json.load(json_data)
-
-            for a in stats:
-                if artist_sans_accents in a['Artist']:
-                    sex = a['Sex']
-                    born = a['Born']
-                    died = a['Died']
-                    movements = a['Movement(s)']
-                    descriptors = a['Descriptors']
-                    nationality = a['Nationality']
-                    break
+            if Artwork.objects.filter(accession_number=accession_number).exists():
+                existing_artwork = Artwork.objects.get(accession_number=accession_number).id
+                if Display.objects.get(artwork_id=existing_artwork).end_date == yesterday:
+                    Display.objects.filter(artwork_id=existing_artwork).update(end_date=today)
                 else:
-                    sex = ""
-                    born = ""
-                    died = ""
-                    movements = ""
-                    descriptors = ""
-                    nationality = ""
+                    continue
+            else:
+                if result['description'] == " ":
+                    artist = "Unknown Artist"
+                    artist_sans_accents = "Unknown Artist"
+                elif result['description'] == "Unknown":
+                    artist = "Unknown Artist"
+                    artist_sans_accents = "Unknown Artist"
+                else:    
+                    artist = strip_parenthesis(result['description'].replace("&#39;","'")).strip()
+                    artist_sans_accents = remove_accents(artist)
+                    artist_sans_accents = artist_sans_accents.replace(',','')
+             
+                title = result['title'].replace("&#39;","'")
 
+                title_sans_accents = remove_accents(title)
+             
+                try:
+                    date = result['date']
+                except:
+                    date = "Date Unknown"
+             
+                medium = result['medium']
+             
+                description = "None"
+             
+                dimensions = "None"
+             
+                collection = remove_tags(result['galleryInformation'])
 
-            yield ArtworkItem(
-                artist=artist,
-                artist_sans_accents=artist_sans_accents,
-                title=title,
-                title_sans_accents=title_sans_accents,
-                date=date,
-                medium=medium,
-                description=description,
-                dimensions=dimensions,
-                collection=collection,
-                coordinates=coordinates,
-                imageurl=imageurl,
-                pageurl=pageurl,
-                accession_number=accession_number,
-                timestamp=timestamp,
-                address=address,
-                sex=sex,
-                born=born,
-                died=died,
-                movements=movements,
-                descriptors=descriptors,
-                nationality=nationality,
-            )
+                if "Fifth" in collection:
+                    collection = Collection.objects.get(collection_name__contains="Fifth")
+                else:
+                    collection = Collection.objects.get(collection_name__contains="Breuer")
+             
+                try:
+                    if result['image'] == "/content/img/placeholders/NoImageAvailableIcon.png":
+                        imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+                    else:
+                        imageurl = result['image']
+                except:
+                    imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+
+                pageurl = "http://www.metmuseum.org" + result['url']
+             
+                timestamp = datetime.date.today().isoformat()
+
+                start_date = datetime.date.today().isoformat()
+
+                end_date = datetime.date.today().isoformat()
+
+                try:
+                    artist = NameVariant.objects.get(name=artist_sans_accents).artist
+                except:
+                    try:
+                        artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                    except:
+                        artist = artist_sans_accents
+                        yield ArtistItem(
+                            artist_sans_accents=artist_sans_accents,
+                        )
+                        time.sleep(2)
+                        artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+
+                yield ArtworkItem(
+                    title=title,
+                    title_sans_accents=title_sans_accents,
+                    date=date,
+                    medium=medium,
+                    description=description,
+                    dimensions=dimensions,
+                    collection=collection,
+                    imageurl=imageurl,
+                    pageurl=pageurl,
+                    accession_number=accession_number,
+                    timestamp=timestamp,
+                    artist=artist,
+                )
+
+                from app.models import Artwork
+
+                artwork = Artwork.objects.get(accession_number=accession_number)
+
+                yield DisplayItem(
+                    collection = collection,
+                    artwork = artwork,
+                    start_date = start_date,
+                    end_date = end_date,
+                )

@@ -15,15 +15,14 @@
             <a href ="{{display.artwork.pageurl}}" target="blank">
                 <img src="{{display.artwork.imageurl}}" style="border:1px solid gray;">
                 <div class="caption">
-                    <h3>{{display.artwork.artist.artist}}</h3>
+                    <h3>{{display.artwork.artist|truncatechars:45}}</h3>
                     <span class="thumb_body">
-                        <p>
-                        <i>{{display.artwork.title|truncatechars:45}}</i></p><p>
-                        {{display.artwork.date}}</p><p>
-                        {{display.artwork.medium|truncatechars:45}}</p>
-                        <div class="onviewloc"><p>
-                        {{display.collection}}
-                        </p></div>
+                        <p><i>{{display.artwork.title|truncatechars:45}}</i></p>
+                        <p>{{display.artwork.date}}</p>
+                        <p>{{display.artwork.medium|truncatechars:45}}</p>
+                        <div class="onviewloc">
+                            <p>On view at {{display.collection}}</p>
+                        </div>
                     </span>
                 </div>
             </a>

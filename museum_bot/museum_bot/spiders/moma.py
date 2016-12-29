@@ -2,12 +2,13 @@ import scrapy
 import datetime
 import json
 import os
+import time
 
 from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
-from museum_bot.items import ArtworkItem
-from app.tools import remove_accents
-from app.models import Artwork
+from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
+from app.tools import remove_accents, yesterday, today
+from app.models import Artwork, Artist, Collection, NameVariant, Display
 
 class MomaSpider(Spider):
     name = "moma"
@@ -43,90 +44,91 @@ class MomaSpider(Spider):
             yield scrapy.Request(full_url, callback=self.parse_artwork)
 
     def parse_artwork(self, response):
-        artist = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h2/a/text()').extract()[0].strip()
-
-        artist_sans_accents = remove_accents(artist)
-
-        try:
-            title = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h1/em/text()').extract()[0].strip()
-        except:
-            title = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h1/text()').extract()[0].strip()
-
-        title_sans_accents = remove_accents(title)
-
-        date = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h3/text()').extract()[0].strip()
-
-        medium = response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dt[contains(text(), "Medium")]/following-sibling::dd[1]/text()').extract()[0].strip()
- 
-        try:
-            description = response.xpath('/html/body/div[3]/div[1]/section[2]/div/div[2]/div[1]/p[1]/text()').extract()[0].strip()
-        except:
-            description = "None"
-
-        dimensions = response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dd[2]/text()').extract()[0].strip()
-
-        collection = "On View at MoMA"
-
-        coordinates = "40.7607° N, 73.9762° W"
-
-        address = "11 West 53rd Street, New York, NY 10019"
-
-        pageurl = response.request.url
-
+        global Artwork
+        
         accession_number = "MOMA" + response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dt[contains(text(), "Object number")]/following-sibling::dd[1]/text()').extract()[0].strip()
-        
-        try:
-            image = response.xpath('/html/body/div[3]/div/div/div[1]/section[1]/div/img/@srcset[1]').extract()[0].split(',')[0].strip('320w').strip()
-            imagestripped = str(image)
-            imageurl = 'http://www.moma.org'+imagestripped
-        except:
-            imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
-         
-        timestamp = datetime.date.today().isoformat()
-        
-        with open(os.path.join(BASE_DIR,'app/artist_list.json')) as json_data:
-            stats=json.load(json_data)
 
-        for a in stats:
-            if artist_sans_accents in a['Artist']:
-                sex = a['Sex']
-                born = a['Born']
-                died = a['Died']
-                movements = a['Movement(s)']
-                descriptors = a['Descriptors']
-                nationality = a['Nationality']
-                break
-            else:
-                sex = ""
-                born = ""
-                died = ""
-                movements = ""
-                descriptors = ""
-                nationality = ""
+        if Artwork.objects.filter(accession_number=accession_number).exists():
+                existing_artwork = Artwork.objects.get(accession_number=accession_number).id
+                if Display.objects.get(artwork_id=existing_artwork).end_date == yesterday:
+                    Display.objects.filter(artwork_id=existing_artwork).update(end_date=today)
+                else:
+                    pass
+        else:
+            artist = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h2/a/text()').extract()[0].strip()
 
+            artist_sans_accents = remove_accents(artist)
 
-        Artwork.objects.filter()
+            try:
+                title = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h1/em/text()').extract()[0].strip()
+            except:
+                title = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h1/text()').extract()[0].strip()
 
-        yield ArtworkItem(
-            artist=artist,
-            artist_sans_accents=artist_sans_accents,
-            title=title,
-            title_sans_accents=title_sans_accents,
-            date=date,
-            medium=medium,
-            description=description,
-            dimensions=dimensions,
-            collection=collection,
-            coordinates=coordinates,
-            imageurl=imageurl,
-            pageurl=pageurl,
-            accession_number=accession_number,
-            timestamp=timestamp,
-            address=address,
-            sex=sex,
-            born=born,
-            died=died,
-            movements=movements,
-            descriptors=descriptors,
-            nationality=nationality,
-        )
+            title_sans_accents = remove_accents(title)
+
+            date = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h3/text()').extract()[0].strip()
+
+            medium = response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dt[contains(text(), "Medium")]/following-sibling::dd[1]/text()').extract()[0].strip()
+     
+            try:
+                description = response.xpath('/html/body/div[3]/div[1]/section[2]/div/div[2]/div[1]/p[1]/text()').extract()[0].strip()
+            except:
+                description = "None"
+
+            dimensions = response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dd[2]/text()').extract()[0].strip()
+
+            collection = Collection.objects.get(collection_name__contains="MoMA")
+
+            pageurl = response.request.url
+            
+            try:
+                image = response.xpath('/html/body/div[3]/div/div/div[1]/section[1]/div/img/@srcset[1]').extract()[0].split(',')[0].strip('320w').strip()
+                imagestripped = str(image)
+                imageurl = 'http://www.moma.org'+imagestripped
+            except:
+                imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+             
+            timestamp = datetime.date.today().isoformat()
+
+            start_date = datetime.date.today().isoformat()
+
+            end_date = datetime.date.today().isoformat()
+            
+            try:
+                artist = NameVariant.objects.get(name=artist_sans_accents).artist
+            except:
+                try:
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                except:
+                    artist = artist_sans_accents
+                    yield ArtistItem(
+                        artist_sans_accents=artist_sans_accents,
+                    )
+                    time.sleep(2)
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+
+            yield ArtworkItem(
+                title=title,
+                title_sans_accents=title_sans_accents,
+                date=date,
+                medium=medium,
+                description=description,
+                dimensions=dimensions,
+                collection=collection,
+                imageurl=imageurl,
+                pageurl=pageurl,
+                accession_number=accession_number,
+                timestamp=timestamp,
+                artist=artist,
+            )
+
+            from app.models import Artwork
+
+            artwork = Artwork.objects.get(accession_number=accession_number)
+
+            yield DisplayItem(
+                collection = collection,
+                artwork = artwork,
+                start_date = start_date,
+                end_date = end_date,
+            )

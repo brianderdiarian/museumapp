@@ -6,6 +6,7 @@ from app.models import Artwork, Artist, Collection, Display, NameVariant, Moveme
 
 class ArtworkAdmin(admin.ModelAdmin):
 	list_display = ('artist', 'title', 'collection', 'timestamp',)
+	ordering = ('artist',)
 admin.site.register(Artwork, ArtworkAdmin)
 
 class ArtistAdmin(admin.ModelAdmin):
@@ -39,7 +40,7 @@ class NameVarientAdmin(admin.ModelAdmin):
 admin.site.register(NameVariant, NameVarientAdmin)
 
 class EthnicityAdmin(admin.ModelAdmin):
-	list_display = ('ethnicity', 'artist')
+	list_display = ('ethnicity',)
 admin.site.register(Ethnicity, EthnicityAdmin)
 
 admin.site.register(Movement)

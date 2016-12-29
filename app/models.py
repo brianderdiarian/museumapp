@@ -3,6 +3,7 @@ from django.contrib.postgres.fields import ArrayField
 
 class Movement(models.Model):
 	movement = models.CharField(max_length=255)
+	description = models.TextField(blank=True)
 
 	def __str__(self):
 		return self.movement
@@ -28,7 +29,6 @@ class Artist(models.Model):
 	born = models.CharField(max_length=255, blank=True)
 	died = models.CharField(max_length=255, blank=True)
 	descriptors = models.CharField(max_length=255, blank=True)
-	nationality = models.CharField(max_length=255, blank=True)
 	new_nationality = models.ManyToManyField(Nationality, blank=True)
 	ethnicity = models.ForeignKey(Ethnicity, null=True, blank=True)
 	movement = models.ManyToManyField(Movement, blank=True)
@@ -41,7 +41,6 @@ class Artist(models.Model):
 
 class Artwork(models.Model):
 	artist = models.ForeignKey(Artist, null=True)
-	#artist_sans_accents = models.CharField(max_length=255, blank=True)
 	title = models.CharField(max_length=255, blank=True)
 	title_sans_accents = models.CharField(max_length=255, blank=True)
 	date = models.CharField(max_length=255, null=True, blank=True)

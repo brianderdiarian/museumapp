@@ -1,26 +1,17 @@
 from django.utils import timezone
 from haystack import indexes
-from app.models import Artwork
+from app.models import Display, Artwork
 
-class ArtworkIndex(indexes.SearchIndex, indexes.Indexable):
+class DisplayIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    # artist = indexes.CharField(model_attr='artist')
-    artist_sans_accents = indexes.CharField(model_attr='artist_sans_accents')
-    title = indexes.CharField(model_attr='title')
-    title_sans_accents = indexes.CharField(model_attr='title_sans_accents')
-    date = indexes.CharField(model_attr='date')
-    medium = indexes.CharField(model_attr='medium')
+    #title = indexes.CharField(model_attr='title')
+    artwork = indexes.CharField(model_attr='artwork')
     collection = indexes.CharField(model_attr='collection')
-    #scrapedate = indexes.CharField(model_attr='scrapedate')
-    timestamp = indexes.DateField(model_attr='timestamp')
-    #imgurl = indexes.CharField(model_attr='imgurl')
-    sex = indexes.CharField(model_attr='sex')
-    nationality = indexes.CharField(model_attr='nationality')
-    descriptors = indexes.CharField(model_attr='descriptors')
-    movements = indexes.CharField(model_attr='movements')
+    end_date = indexes.CharField(model_attr='end_date')
+    start_date = indexes.CharField(model_attr='start_date')
 
     def get_model(self):
-        return Artwork
+        return Display
 
     #def index_queryset(self, using=None):
     #    """Used when the entire index for model is updated."""

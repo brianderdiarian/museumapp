@@ -156,6 +156,38 @@ input[type=text]:focus {
 	border-radius: 4px;
 }
 
+.movement-description {
+	margin: auto;
+	text-align: center;
+	color: #000000;
+	font-style: bold;
+	background: rgba(255,255,255,0.7);
+	border-radius: 15px;
+	width: 100%;
+	padding: 20px;
+}
+
+.movement-description p {
+	margin: auto;
+	text-align: left;
+}
+
+.artist-description {
+	margin: auto;
+	text-align: center;
+	color: #000000;
+	font-style: bold;
+	background: rgba(255,255,255,0.7);
+	border-radius: 15px;
+	width: 300px;
+	padding: 20px;
+}
+
+.artist-description p {
+	margin: auto;
+	text-align: center;
+}
+
 .page-header {
     padding-bottom: 9px;
     margin: 40px 0 20px;

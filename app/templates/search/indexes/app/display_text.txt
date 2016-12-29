@@ -1,0 +1,8 @@
+{{ object.artwork }}
+{{ object.artwork.artist }}
+{{ object.artwork.artist.movements }}
+{{ object.artwork.date }}
+{{ object.collection }}
+{{ object.end_date }}
+{{ object.start_date }}
+

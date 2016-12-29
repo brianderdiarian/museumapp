@@ -52,8 +52,8 @@
                     		<ul class="dropdown-menu">
                         		
                         		<li>
-                        			{% for movement in mlist %}
-                            		<a href="/search/?q={{ movement }}">{{ movement }}</a>
+                        			{% for movement in movements %}
+                            		<a href="/movement/{{ movement.id }}">{{ movement }}</a>
                         			{% endfor %}
                         		</li>
                         
@@ -65,8 +65,8 @@
                     		<ul class="dropdown-menu">
                         		
                         		<li>
-                        			{% for artist in artistlist %}
-                            		<a href="/search/?q={{ artist.artist }}">{{ artist.artist|truncatechars:30 }}</a>
+                        			{% for artist in artists %}
+                            		<a href="/artist/{{ artist.id }}">{{ artist|truncatechars:30 }}</a>
                         			{% endfor %}
                         		</li>
                         

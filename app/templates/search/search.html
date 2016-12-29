@@ -20,15 +20,15 @@
 
                     <div class="thumbnail">
                         
-                        <a href ="{{result.object.pageurl}}" target="blank">
-                            <img src="{{result.object.imageurl}}" style="border:1px solid gray;">
+                        <a href ="{{result.object.artwork.pageurl}}" target="blank">
+                            <img src="{{result.object.artwork.imageurl}}" style="border:1px solid gray;">
                         
                             <div class="caption">
-                                <h3>{{result.object.artist}}</h3>
+                                <h3>{{result.object.artwork.artist}}</h3>
                                 <span class="thumb_body">
-                                    <p><i>{{result.object.title|truncatechars:45}}</i></p>
-                                    <p>{{result.object.date}}</p>
-                                    <p>{{result.object.medium|truncatechars:45}}</p>
+                                    <p><i>{{result.object.artwork|truncatechars:45}}</i></p>
+                                    <p>{{result.object.artwork.date}}</p>
+                                    <p>{{result.object.artwork.medium|truncatechars:45}}</p>
                                     <div class="onviewloc">
                                         <p>{{result.object.collection}}</p>
                                     </div>

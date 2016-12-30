@@ -9,7 +9,7 @@ from scrapy.spiders import Spider
 from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import strip_parenthesis, cleanhtml
 from app.tools import remove_accents
-from app.models import Artwork, Artist, Collection, NameVariant
+from app.models import Artwork, Artist, Collection, NameVariant, Display
 
 class MetSpider(Spider):
     name = "nyguggenheim"
@@ -23,11 +23,25 @@ class MetSpider(Spider):
 
         results = json.loads(response.body_as_unicode())
 
+        global Artwork
+
         for result in results:
 
-            artist = result['artist'][0]['name']
+            accession_number = "NYGUG" + result['accession']
 
-            artist_sans_accents = remove_accents(artist)
+            if Artwork.objects.filter(accession_number=accession_number).exists():
+                existing_artwork = Artwork.objects.get(accession_number=accession_number).id
+                if Display.objects.get(artwork_id=existing_artwork).end_date == yesterday:
+                    Display.objects.filter(artwork_id=existing_artwork).update(end_date=today)
+                else:
+                    continue
+            else:
+                if result['artist'][0]['name'] == " ":
+                    artist = "Unknown"
+                    artist_sans_accents = "Unknown"
+                else:    
+                    artist = result['artist'][0]['name']
+                    artist_sans_accents = remove_accents(artist)
          
             title = result['title']['rendered']
 
@@ -40,10 +54,8 @@ class MetSpider(Spider):
             description = cleanhtml(result['content']['rendered'])
          
             dimensions = result['dimensions']
-         
-            collection = "Solomon R. Guggenheim Museum"
 
-            collection = Collection.objects.get(collection_name__contains=collection)
+            collection = Collection.objects.get(collection_name__contains="Guggenheim")
          
             try:
                 imageurl = result['featured_image']['src']
@@ -52,20 +64,24 @@ class MetSpider(Spider):
 
             pageurl =  result['link']
 
-            accession_number = "NYGUG" + result['accession']
-         
             timestamp = datetime.date.today().isoformat()
 
-            artistlist = Artist.objects.values_list('artist_sans_accents', flat=True)
-                
-            if any(artist_sans_accents in x for x in artistlist):
-                pass
-            else:
-                yield ArtistItem(
-                    artist_sans_accents=artist_sans_accents,
-                )
+            start_date = datetime.date.today().isoformat()
 
-            artist = Artist.objects.get(artist_sans_accents__contains=artist_sans_accents)    
+            end_date = datetime.date.today().isoformat()
+
+            try:
+                artist = NameVariant.objects.get(name=artist_sans_accents).artist
+            except:
+                try:
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                except:
+                    artist = artist_sans_accents
+                    yield ArtistItem(
+                        artist_sans_accents=artist_sans_accents,
+                    )
+                    time.sleep(2)
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
 
             yield ArtworkItem(
                 title=title,
@@ -89,4 +105,6 @@ class MetSpider(Spider):
             yield DisplayItem(
                 collection = collection,
                 artwork = artwork,
+                start_date = start_date,
+                end_date = end_date,
             )

@@ -164,7 +164,7 @@ input[type=text]:focus {
 	background: rgba(255,255,255,0.7);
 	border-radius: 15px;
 	width: 100%;
-	padding: 20px;
+	padding: 30px;
 }
 
 .movement-description p {
@@ -186,6 +186,11 @@ input[type=text]:focus {
 .artist-description p {
 	margin: auto;
 	text-align: center;
+}
+
+#artist {
+	font-weight: bold;
+	font-size: 15px;
 }
 
 .page-header {

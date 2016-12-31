@@ -32,4 +32,6 @@ urlpatterns = [
 	), name='haystack_search'),
 
 	url(r'^about/$', views.about, name='about'),
+
+	url(r'^contact/$', views.contact, name='contact'),
 ]

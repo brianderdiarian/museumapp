@@ -175,22 +175,23 @@ input[type=text]:focus {
 .artist-description {
 	margin: auto;
 	text-align: center;
-	color: #000000;
+	color: #ffffff;
 	font-style: bold;
-	background: rgba(255,255,255,0.7);
-	border-radius: 15px;
+	background: #000000;
+	border-radius: 5px;
 	width: 300px;
-	padding: 20px;
+	height: 100px;
+}
+
+#artist {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 40px;
 }
 
 .artist-description p {
 	margin: auto;
 	text-align: center;
-}
-
-#artist {
-	font-weight: bold;
-	font-size: 15px;
 }
 
 .page-header {
@@ -229,4 +230,43 @@ input[type=text]:focus {
     box-shadow: none;
     max-height: 400px;
     overflow: auto;
+}
+
+.panel-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.panel-heading {
+	text-align: center;
+	background: rgba(255,255,255,0.2);
+}
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #d8d8d8;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    text-align: right;
+}
+
+.panel-group .panel {
+    margin-bottom: 0;
+    border-radius: 4px;
+    border-color: black;
+}
+
+.panel-default>.panel-heading {
+    color: #ffffff;
+    background-color: #000000;
+    border-color: transparent;
+}
+
+.panel-footer {
+    padding: 10px 15px;
+    background-color: #d8d8d8;
+    border-top: 1px solid #ddd;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }

@@ -1,5 +1,5 @@
-{{ object.artwork }}
-{{ object.artwork.artist }}
+{{ object.artwork|safe }}
+{{ object.artwork.artist|safe }}
 {{ object.artwork.artist.movements }}
 {{ object.artwork.date }}
 {{ object.collection }}

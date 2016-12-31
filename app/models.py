@@ -60,6 +60,7 @@ class Collection(models.Model):
 	collection_name = models.CharField(max_length=255, blank=True)
 	coordinates = models.CharField(max_length=255)
 	address = models.CharField(max_length=255, null=True, blank=True)
+	description = models.TextField(blank=True)
 
 	def __str__(self):
 		return self.collection_name
@@ -80,3 +81,9 @@ class NameVariant(models.Model):
 
 	def __str__(self):
 		return self.name
+
+class Info(models.Model):
+	about = models.TextField(max_length=1000, null=True, blank=True)
+
+	def __str__(self):
+		return self.about

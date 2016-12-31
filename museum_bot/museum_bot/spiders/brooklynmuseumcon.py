@@ -2,11 +2,13 @@ import scrapy
 import datetime
 import json
 import os
+import time
 
 from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
-from museum_bot.items import ArtworkItem
-from app.tools import remove_accents
+from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
+from app.tools import remove_accents, yesterday, today
+from app.models import Artwork, Artist, Collection, NameVariant, Display
 
 class MomaSpider(Spider):
     name = "brooklynmuseumcon"
@@ -26,78 +28,86 @@ class MomaSpider(Spider):
             yield scrapy.Request(full_url, callback=self.parse_artwork)
 
     def parse_artwork(self, response):
-        try:
-            artist = response.xpath('/html/body/div[3]/div[1]/div[2]/div[2]/h3/text()').extract()[0].strip()
-            artist_sans_accents = remove_accents(artist)
-        except:
-            artist = response.xpath('/html/body/div[3]/div[1]/div[2]/div[6]/a/text()').extract()[0].strip()
-            artist_sans_accents = remove_accents(artist)
-
-        title = response.xpath('/html/body/div[3]/div[1]/div[2]/div[1]/h1/text()').extract()[0].strip()
-
-        title_sans_accents = remove_accents(title)
-
-        date = response.xpath('//strong[contains(text(), "DATES")]/parent::div[1]/text()').extract()[1].strip()
-
-        medium = response.xpath('//strong[contains(text(), "MEDIUM")]/parent::div[1]/text()').extract()[1].strip()
-
-        description = "None"
-
-        dimensions = response.xpath('//strong[contains(text(), "DIMENSIONS")]/parent::div[1]/text()').extract()[1].strip()
-        collection = "On View at the Brooklyn Museum"
-        coordinates = "40.6716° N, 73.9627° W"
-        address = "200 Eastern Pkwy, Brooklyn, NY 11238"
-        pageurl = response.request.url
+        global Artwork
 
         accession_number = "BM" + response.xpath('//strong[contains(text(), "ACCESSION NUMBER")]/parent::div[1]/text()').extract()[1].strip()
-        
-        try:
-            imageurl = response.xpath('/html/body/div[3]/div[1]/div[1]/div/div/div[1]/div/img/@src').extract()[0]
-        except:
-            imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
-   
-        timestamp = datetime.date.today().isoformat()
-         
-        with open(os.path.join(BASE_DIR,'app/artist_list.json')) as json_data:
-            stats=json.load(json_data)
 
-        for a in stats:
-            if artist_sans_accents in a['Artist']:
-                sex = a['Sex']
-                born = a['Born']
-                died = a['Died']
-                movements = a['Movement(s)']
-                descriptors = a['Descriptors']
-                nationality = a['Nationality']
-                break
+        if Artwork.objects.filter(accession_number=accession_number).exists():
+            existing_artwork = Artwork.objects.get(accession_number=accession_number).id
+            if Display.objects.get(artwork_id=existing_artwork).end_date == yesterday:
+                Display.objects.filter(artwork_id=existing_artwork).update(end_date=today)
             else:
-                sex = ""
-                born = ""
-                died = ""
-                movements = ""
-                descriptors = ""
-                nationality = ""
+                pass
+        else:
+            try:
+                artist = response.xpath('/html/body/div[3]/div[1]/div[2]/div[2]/h3/text()').extract()[0].strip()
+                artist_sans_accents = remove_accents(artist)
+            except:
+                artist = response.xpath('/html/body/div[3]/div[1]/div[2]/div[6]/a/text()').extract()[0].strip()
+                artist_sans_accents = remove_accents(artist)
 
-        yield ArtworkItem(
-            artist=artist,
-            artist_sans_accents=artist_sans_accents,
-            title=title,
-            title_sans_accents=title_sans_accents,
-            date=date,
-            medium=medium,
-            description=description,
-            dimensions=dimensions,
-            collection=collection,
-            coordinates=coordinates,
-            imageurl=imageurl,
-            pageurl=pageurl,
-            accession_number=accession_number,
-            timestamp=timestamp,
-            address=address,
-            sex=sex,
-            born=born,
-            died=died,
-            movements=movements,
-            descriptors=descriptors,
-            nationality=nationality,
-        )
+            title = response.xpath('/html/body/div[3]/div[1]/div[2]/div[1]/h1/text()').extract()[0].strip()
+
+            title_sans_accents = remove_accents(title)
+
+            date = response.xpath('//strong[contains(text(), "DATES")]/parent::div[1]/text()').extract()[1].strip()
+
+            medium = response.xpath('//strong[contains(text(), "MEDIUM")]/parent::div[1]/text()').extract()[1].strip()
+
+            description = "None"
+
+            dimensions = response.xpath('//strong[contains(text(), "DIMENSIONS")]/parent::div[1]/text()').extract()[1].strip()
+            
+            collection = Collection.objects.get(collection_name__contains="Brooklyn Museum")
+            
+            pageurl = response.request.url
+
+            try:
+                imageurl = response.xpath('/html/body/div[3]/div[1]/div[1]/div/div/div[1]/div/img/@src').extract()[0]
+            except:
+                imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+       
+            timestamp = datetime.date.today().isoformat()
+             
+            start_date = datetime.date.today().isoformat()
+
+            end_date = datetime.date.today().isoformat()
+            
+            try:
+                artist = NameVariant.objects.get(name=artist_sans_accents).artist
+            except:
+                try:
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                except:
+                    artist = artist_sans_accents
+                    yield ArtistItem(
+                        artist_sans_accents=artist_sans_accents,
+                    )
+                    time.sleep(2)
+                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+
+            yield ArtworkItem(
+                title=title,
+                title_sans_accents=title_sans_accents,
+                date=date,
+                medium=medium,
+                description=description,
+                dimensions=dimensions,
+                collection=collection,
+                imageurl=imageurl,
+                pageurl=pageurl,
+                accession_number=accession_number,
+                timestamp=timestamp,
+                artist=artist,
+            )
+
+            from app.models import Artwork
+
+            artwork = Artwork.objects.get(accession_number=accession_number)
+
+            yield DisplayItem(
+                collection = collection,
+                artwork = artwork,
+                start_date = start_date,
+                end_date = end_date,
+            )

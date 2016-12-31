@@ -13,7 +13,7 @@
         </div>
     <br>
         <div class="artist-description">
-            <p id="artist">{{ artist }}</p>
+            <h2 id="artist">{{ artist|truncatechars:28 }}</h2>
             <p>{{ artist.nationality }}</p>
             <p>{{ artist.born }} - {{ artist.died }}</p>
         </div>

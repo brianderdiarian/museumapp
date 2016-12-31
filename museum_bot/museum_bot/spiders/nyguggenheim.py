@@ -8,7 +8,7 @@ from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
 from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import strip_parenthesis, cleanhtml
-from app.tools import remove_accents
+from app.tools import remove_accents, today, yesterday
 from app.models import Artwork, Artist, Collection, NameVariant, Display
 
 class MetSpider(Spider):
@@ -43,68 +43,68 @@ class MetSpider(Spider):
                     artist = result['artist'][0]['name']
                     artist_sans_accents = remove_accents(artist)
          
-            title = result['title']['rendered']
+                title = result['title']['rendered']
 
-            title_sans_accents = remove_accents(title)
-         
-            date = result['dates']
-         
-            medium = result['medium']
-         
-            description = cleanhtml(result['content']['rendered'])
-         
-            dimensions = result['dimensions']
+                title_sans_accents = remove_accents(title)
+             
+                date = result['dates']
+             
+                medium = result['medium']
+             
+                description = cleanhtml(result['content']['rendered'])
+             
+                dimensions = result['dimensions']
 
-            collection = Collection.objects.get(collection_name__contains="Guggenheim")
-         
-            try:
-                imageurl = result['featured_image']['src']
-            except:
-                imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
-
-            pageurl =  result['link']
-
-            timestamp = datetime.date.today().isoformat()
-
-            start_date = datetime.date.today().isoformat()
-
-            end_date = datetime.date.today().isoformat()
-
-            try:
-                artist = NameVariant.objects.get(name=artist_sans_accents).artist
-            except:
+                collection = Collection.objects.get(collection_name__contains="Guggenheim")
+             
                 try:
-                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                    imageurl = result['featured_image']['src']
                 except:
-                    artist = artist_sans_accents
-                    yield ArtistItem(
-                        artist_sans_accents=artist_sans_accents,
-                    )
-                    time.sleep(2)
-                    artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                    imageurl = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
-            yield ArtworkItem(
-                title=title,
-                title_sans_accents=title_sans_accents,
-                date=date,
-                medium=medium,
-                description=description,
-                dimensions=dimensions,
-                collection=collection,
-                imageurl=imageurl,
-                pageurl=pageurl,
-                accession_number=accession_number,
-                timestamp=timestamp,
-                artist=artist,
-            )
+                pageurl =  result['link']
 
-            from app.models import Artwork
+                timestamp = datetime.date.today().isoformat()
 
-            artwork = Artwork.objects.get(accession_number=accession_number)
+                start_date = datetime.date.today().isoformat()
 
-            yield DisplayItem(
-                collection = collection,
-                artwork = artwork,
-                start_date = start_date,
-                end_date = end_date,
-            )
+                end_date = datetime.date.today().isoformat()
+
+                try:
+                    artist = NameVariant.objects.get(name=artist_sans_accents).artist
+                except:
+                    try:
+                        artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+                    except:
+                        artist = artist_sans_accents
+                        yield ArtistItem(
+                            artist_sans_accents=artist_sans_accents,
+                        )
+                        time.sleep(2)
+                        artist = Artist.objects.get(artist_sans_accents=artist_sans_accents)
+
+                yield ArtworkItem(
+                    title=title,
+                    title_sans_accents=title_sans_accents,
+                    date=date,
+                    medium=medium,
+                    description=description,
+                    dimensions=dimensions,
+                    collection=collection,
+                    imageurl=imageurl,
+                    pageurl=pageurl,
+                    accession_number=accession_number,
+                    timestamp=timestamp,
+                    artist=artist,
+                )
+
+                from app.models import Artwork
+
+                artwork = Artwork.objects.get(accession_number=accession_number)
+
+                yield DisplayItem(
+                    collection = collection,
+                    artwork = artwork,
+                    start_date = start_date,
+                    end_date = end_date,
+                )

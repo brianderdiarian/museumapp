@@ -7,8 +7,8 @@ class DisplayIndex(indexes.SearchIndex, indexes.Indexable):
     #title = indexes.CharField(model_attr='title')
     artwork = indexes.CharField(model_attr='artwork')
     collection = indexes.CharField(model_attr='collection')
-    end_date = indexes.CharField(model_attr='end_date')
-    start_date = indexes.CharField(model_attr='start_date')
+    end_date = indexes.DateTimeField(model_attr='end_date')
+    start_date = indexes.DateTimeField(model_attr='start_date')
 
     def get_model(self):
         return Display

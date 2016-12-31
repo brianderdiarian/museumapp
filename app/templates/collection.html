@@ -8,13 +8,13 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <p class="panel-title">
-                    <a data-toggle="collapse" href="#collapse1">{{ movement }}<span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span></a>
+                    <a data-toggle="collapse" href="#collapse1">{{ collection|title }}<span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span></a>
                 </p>
             </div>
-            {% if movement.description %}
+            {% if collection.description %}
             <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">{{ movement.description|linebreaksbr }}</div>
-                <div class="panel-footer"><a href ="https://en.wikipedia.org/wiki/{{movement}}" target='_blank'>From Wikipedia, the free encyclopedia</a></div>
+                <div class="panel-body">{{ collection.description|linebreaksbr }}</div>
+                <div class="panel-footer"><a href ="https://en.wikipedia.org/wiki/{{collection}}" target='_blank'>From Wikipedia, the free encyclopedia</a></div>
             </div>
             {% endif %}
         </div>

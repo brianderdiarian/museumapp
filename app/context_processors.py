@@ -1,4 +1,4 @@
-from .models import Artwork, Movement, Artist
+from .models import Artwork, Movement, Artist, Collection
 from .tools import current, today#, mlist, artistlist, artist_by_movement
 
 def movement_processor(request):
@@ -7,8 +7,11 @@ def movement_processor(request):
 
 	artists = Artist.objects.filter(artwork__display__end_date__gte=today).exclude(artist_sans_accents__contains="Attributed").order_by('artist_sans_accents').distinct()
 
+	collections = Collection.objects.order_by('collection_name').distinct()
+
 
 	return {'movements': movements,
 			'artists': artists,
+			'collections': collections,
 			# 'artist_by_movement': artist_by_movement
 			}

@@ -21,6 +21,8 @@ urlpatterns = [
 
 	url(r'^movement/(?P<movement_id>[0-9]+)/$', views.movement, name='movement'),
 
+	url(r'^collection/(?P<collection_id>[0-9]+)/$', views.collection, name='collection'),
+
 	url(r'^artist/(?P<artist_id>[0-9]+)/$', views.artist, name='artist'),
 	
 	url(r'^search/$', search_view_factory(
@@ -28,4 +30,6 @@ urlpatterns = [
 		form_class=ArtSearchForm,
 		searchqueryset = sqs
 	), name='haystack_search'),
+
+	url(r'^about/$', views.about, name='about'),
 ]

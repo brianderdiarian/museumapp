@@ -36,14 +36,15 @@
 		    	</div>
         		<div class="collapse navbar-collapse" id="myNavbar">
             		<ul class="nav navbar-nav">
-                		<li class="active"><a href="#">About</a></li>
+                		<li class="active"><a href="/about">About</a></li>
                 		<li>
                     		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Collections<b class="caret"></b></a>
                 			<ul class="dropdown-menu">
-                    			<li><a href="/search/?q=MoMA">MoMA</a></li>
-                    			<li><a href="/search/?q=Met">The Met</a></li>
-                    			<li><a href="/search/?q=Brooklyn Museum">Brooklyn Museum</a></li>
-                    			<li><a href="/search/?q=Guggenheim">Solomon R Guggenheim</a></li>
+                				<li>
+	                    			{% for collection in collections %}
+	                            		<a href="/collection/{{ collection.id }}">{{ collection }}</a>
+	                        		{% endfor %}
+	                        	</li>
                 			</ul>
                 		</li>				
 

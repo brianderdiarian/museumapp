@@ -1,4 +1,4 @@
-
+import os
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, render_to_response
@@ -18,6 +18,8 @@ from django.core.mail import EmailMessage
 from django.shortcuts import redirect
 from django.template import Context
 from django.template.loader import get_template
+
+EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 
 # yester = current - timedelta(1)
 
@@ -146,7 +148,7 @@ def contact(request):
 				"New contact form submission",
 				content,
 				"artnewgo" +'',
-				[emailaddress],
+				[EMAIL_ADDRESS],
 				headers = {'Reply-To': contact_email }
             )
 

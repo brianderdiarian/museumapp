@@ -3,3 +3,5 @@
 db.sqlite3
 
 config.py
+
+.DS_Store

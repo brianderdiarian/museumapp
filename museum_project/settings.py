@@ -29,14 +29,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if os.getcwd() == '/app':
     SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 else:
-    SECRET_KEY = LOCAL_SECRET_KEY
+    try:
+        SECRET_KEY = LOCAL_SECRET_KEY
+    except:
+        pass
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.getcwd() == '/app':
     DEBUG = False
 else:
-    DEBUG = LOCAL_DEBUG
+    try:
+        DEBUG = LOCAL_DEBUG
+    except:
+        pass
 
 
 ALLOWED_HOSTS = []

@@ -1,5 +1,6 @@
 {{ object.artwork|safe }}
 {{ object.artwork.artist|safe }}
+{{ object.artwork.medium }}
 {{ object.artwork.artist.movements }}
 {{ object.artwork.date }}
 {{ object.collection }}

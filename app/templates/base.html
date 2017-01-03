@@ -44,7 +44,7 @@
                 			<ul class="dropdown-menu">
                 				<li>
 	                    			{% for collection in collections %}
-	                            		<a href="/collection/{{ collection.id }}">{{ collection }}</a>
+	                            		<a href="/collection/{{ collection.id }}">{{ collection|title }}</a>
 	                        		{% endfor %}
 	                        	</li>
                 			</ul>

@@ -6,11 +6,12 @@ from haystack.query import SearchQuerySet
 from haystack.generic_views import SearchView
 from django.conf import settings
 from django.http import HttpResponse
+from django.db.models import Count
 
 from datetime import date, timedelta
 
 from random import randint
-from .models import Artwork, Display, Movement, Artist, Collection, Info
+from .models import Artwork, Display, Movement, Artist, Collection, Info, Nationality
 from .tools import current, yesterday, today#, mlist, artist_by_movement
 
 from .forms import ContactForm
@@ -112,8 +113,12 @@ def collection(request, collection_id):
 	except(EmptyPage, InvalidPage):
 		artworks = paginator.page(paginator.num_pages)
 
+	movement_tally = Artwork.objects.filter(display__collection=collection).filter(display__end_date__gte=today).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
+
 	context = { 'artworks': artworks,
-				'collection': collection, }
+				'collection': collection,
+				'movement_tally': movement_tally,
+				}
 
 	return render(request, 'collection.html', context)
 
@@ -156,5 +161,27 @@ def contact(request):
 			return redirect('/')
 
 	return render(request, 'contact.html', {'form': form_class, })
+
+# def stats(request):
+# 	male = Artwork.objects.filter(artist__sex__contains="Male").filter(display__end_date__gte=today).count()
+# 	female = Artwork.objects.filter(artist__sex__contains="Female").filter(display__end_date__gte=today).count()
+# 	unknown = Artwork.objects.filter(artist__sex="").filter(display__end_date__gte=today).count()
+	
+
+# 	nationality = Nationality.objects.all().values('nation').annotate(Count("artist"))
+# 	nationality = list(nationality)
+
+# 	movement_tally = Artwork.objects.filter(display__collection=4).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
+# 	movement_tally = list(movement_tally)
+
+# 	context = {
+# 		'male': male,
+# 		'female': female,
+# 		'unknown': unknown,
+# 		'nationality': nationality,
+# 		'movement_tally': movement_tally,
+# 		}
+
+# 	return render(request, 'stats.html', context)
 
 

@@ -10,6 +10,7 @@ class Movement(models.Model):
 
 class Nationality(models.Model):
 	nationality = models.CharField(max_length=255)
+	nation = models.CharField(max_length=100, null=True)
 
 	def __str__(self):
 		return self.nationality

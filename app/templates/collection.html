@@ -2,7 +2,43 @@
 
 
 {% block content %}
-    
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      
+      //artist by sex pie chart
+
+
+      //artist count by movement pie chart
+      google.charts.setOnLoadCallback(drawArtistCountMovementChart);
+
+      //artist by nationality chart
+
+
+      function drawArtistCountMovementChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Movement', 'Artworks On View'],
+          {% for movement in movement_tally %}
+            ['{{ movement.artist__movement__movement }}',     {{ movement.artist__count }}],
+          {% endfor %}
+          
+        ]);
+
+        var options = {
+            title: 'Artworks On View by Movement',
+            sliceVisibilityThreshold: .02,
+            width: 900,
+            height: 400,
+            pieSliceText: 'none',
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('movepiechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 
     <div class="panel-group">
         <div class="panel panel-default">
@@ -13,7 +49,15 @@
             </div>
             {% if collection.description %}
             <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">{{ collection.description|linebreaksbr }}</div>
+                <div class="panel-body">{{ collection.description|linebreaksbr }}<br>
+
+                    <table class="columns">
+                        <tr>
+                            <div id="movepiechart" align="center"></div>
+                        </tr>
+                    </table>
+
+                </div>
                 <div class="panel-footer"><a href ="https://en.wikipedia.org/wiki/{{collection}}" target='_blank'>From Wikipedia, the free encyclopedia</a></div>
             </div>
             {% endif %}
@@ -76,6 +120,7 @@
     {% endif %}
     </div>
 {% endif %}
+
 
 
 {% endblock content %}

@@ -295,12 +295,19 @@ table, form {
 
 #contact-forms textarea {
 	color: #000;
+	width: 100%;
 }
 
 #contact-forms input {
 	color: #000;
+	width: 100%;
 }
 
 #contact-forms button {
 	background-color: #000;
+}
+
+.chart {
+  width: 100%; 
+  min-height: 550px;
 }

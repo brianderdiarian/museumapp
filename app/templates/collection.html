@@ -8,12 +8,13 @@
       google.charts.load('current', {'packages':['corechart']});
       
       //artist by sex pie chart
+      google.charts.setOnLoadCallback(drawSexChart);
 
 
       //artist count by movement pie chart
       google.charts.setOnLoadCallback(drawArtistCountMovementChart);
 
-      //artist by nationality chart
+      
 
 
       function drawArtistCountMovementChart() {
@@ -29,8 +30,6 @@
         var options = {
             title: 'Artworks On View by Movement',
             sliceVisibilityThreshold: .02,
-            width: 900,
-            height: 400,
             pieSliceText: 'none',
         };
 
@@ -38,6 +37,33 @@
 
         chart.draw(data, options);
       }
+
+      function drawSexChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Sex', 'Artworks On View'],
+          
+            ['Female',     {{ female }}],
+            ['Male',     {{ male }}],
+            ['Unknown',     {{ unknown }}],
+          
+          
+        ]);
+
+        var options = {
+          title: 'Artworks On View by Sex',
+          sliceVisibilityThreshold: .02
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('sexpiechart'));
+
+        chart.draw(data, options);
+      }
+
+      $(window).resize(function(){
+        drawArtistCountMovementChart();
+        drawSexChart();
+        });
     </script>
 
     <div class="panel-group">
@@ -53,7 +79,12 @@
 
                     <table class="columns">
                         <tr>
-                            <div id="movepiechart" align="center"></div>
+                            <div id="movepiechart" align="center" class="chart"></div>
+                        </tr>
+                    </table>
+                    <table class="columns">
+                        <tr>
+                            <div id="sexpiechart" align="center" class="chart"></div>
                         </tr>
                     </table>
 

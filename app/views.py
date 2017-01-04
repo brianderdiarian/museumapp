@@ -115,9 +115,17 @@ def collection(request, collection_id):
 
 	movement_tally = Artwork.objects.filter(display__collection=collection).filter(display__end_date__gte=today).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
 
+	male = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Male").filter(display__end_date__gte=today).count()
+	female = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Female").filter(display__end_date__gte=today).count()
+	unknown = Artwork.objects.filter(display__collection=collection).filter(artist__sex="").filter(display__end_date__gte=today).count()
+
 	context = { 'artworks': artworks,
 				'collection': collection,
 				'movement_tally': movement_tally,
+				'male': male,
+				'female': female,
+				'unknown': unknown,
+
 				}
 
 	return render(request, 'collection.html', context)

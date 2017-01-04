@@ -9,7 +9,7 @@ from haystack.views import SearchView, search_view_factory
 from .tools import current, today, yesterday
 from .forms import ArtSearchForm
 
-sqs = SearchQuerySet().filter(end_date__gte=today)
+sqs = SearchQuerySet().filter(start_date__lte=today).filter(end_date__gte=today)
 
 urlpatterns = [
 	#homepage

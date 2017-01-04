@@ -221,6 +221,7 @@ if not DEBUG:
             'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
             'URL': es.scheme + '://' + es.hostname + ':' + str(port),
             'INDEX_NAME': 'documents',
+            'TIMEOUT': 30,
         },
     }
 

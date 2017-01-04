@@ -7,7 +7,7 @@ def movement_processor(request):
 
 	artists = Artist.objects.filter(artwork__display__end_date__gte=today).exclude(artist_sans_accents__contains="Attributed").order_by('artist_sans_accents').distinct()
 
-	collections = Collection.objects.order_by('collection_name').distinct()
+	collections = Collection.objects.annotate(num_displays=Count('display')).order_by('-num_displays').distinct()
 
 
 	return {'movements': movements,

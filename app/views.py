@@ -26,7 +26,7 @@ EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 
 def index(request):
     #artists = Artwork.objects.filter(timestamp__gte=current).order_by('?')[:12]
-    displays = Display.objects.filter(end_date__gte=today).order_by('?')[:12]
+    displays = Display.objects.filter(display__start_date__lte=today).filter(end_date__gte=today).order_by('?')[:12]
     context={'displays': displays}
     return render(request, 'index.html', context)
 
@@ -39,7 +39,7 @@ def index(request):
 # 	return render(request, 'new.html', context)
 
 def women(request):
-	femaleArtists_list = Artwork.objects.filter(artist__sex="Female").filter(display__end_date__gte=today).order_by('?')
+	femaleArtists_list = Artwork.objects.filter(artist__sex="Female").filter(display__start_date__lte=today).filter(display__end_date__gte=today).order_by('?')
 
 	paginator = Paginator(femaleArtists_list, 24)
 
@@ -59,7 +59,7 @@ def women(request):
 	return render(request, 'women.html', context)
 
 def movement(request, movement_id):
-	artworks = Artwork.objects.filter(artist__movement__id=movement_id).filter(display__end_date__gte=today).order_by('artist__artist_sans_accents')
+	artworks = Artwork.objects.filter(artist__movement__id=movement_id).filter(display__start_date__lte=today).filter(display__end_date__gte=today).order_by('artist__artist_sans_accents')
 	movement = Movement.objects.get(id=movement_id)
 	paginator = Paginator(artworks, 24)
 
@@ -79,7 +79,7 @@ def movement(request, movement_id):
 	return render(request, 'movement.html', context)
 
 def artist(request, artist_id):
-	artworks = Artwork.objects.filter(artist__id=artist_id).filter(display__end_date__gte=today)
+	artworks = Artwork.objects.filter(artist__id=artist_id).filter(display__start_date__lte=today).filter(display__end_date__gte=today)
 	artist = Artist.objects.get(id=artist_id)
 	paginator = Paginator(artworks, 24)
 
@@ -113,11 +113,11 @@ def collection(request, collection_id):
 	except(EmptyPage, InvalidPage):
 		artworks = paginator.page(paginator.num_pages)
 
-	movement_tally = Artwork.objects.filter(display__collection=collection).filter(display__end_date__gte=today).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
+	movement_tally = Artwork.objects.filter(display__collection=collection).filter(display__start_date__lte=today).filter(display__end_date__gte=today).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
 
-	male = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Male").filter(display__end_date__gte=today).count()
-	female = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Female").filter(display__end_date__gte=today).count()
-	unknown = Artwork.objects.filter(display__collection=collection).filter(artist__sex="").filter(display__end_date__gte=today).count()
+	male = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Male").filter(display__start_date__lte=today).filter(display__end_date__gte=today).count()
+	female = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Female").filter(display__start_date__lte=today).filter(display__end_date__gte=today).count()
+	unknown = Artwork.objects.filter(display__collection=collection).filter(artist__sex="").filter(display__start_date__lte=today).filter(display__end_date__gte=today).count()
 
 	context = { 'artworks': artworks,
 				'collection': collection,

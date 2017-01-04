@@ -1,5 +1,6 @@
 from .models import Artwork, Movement, Artist, Collection
 from .tools import current, today#, mlist, artistlist, artist_by_movement
+from django.db.models import Count
 
 def movement_processor(request):
 	movements = Movement.objects.filter(artist__artwork__display__end_date__gte=today).order_by('movement').distinct()

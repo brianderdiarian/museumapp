@@ -26,7 +26,7 @@ EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 
 def index(request):
     #artists = Artwork.objects.filter(timestamp__gte=current).order_by('?')[:12]
-    displays = Display.objects.filter(display__start_date__lte=today).filter(end_date__gte=today).order_by('?')[:12]
+    displays = Display.objects.filter(start_date__lte=today).filter(end_date__gte=today).order_by('?')[:12]
     context={'displays': displays}
     return render(request, 'index.html', context)
 

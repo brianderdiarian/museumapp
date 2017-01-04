@@ -99,7 +99,7 @@ def artist(request, artist_id):
 	return render(request, 'artist.html', context)
 
 def collection(request, collection_id):
-	artworks = Artwork.objects.filter(display__collection__id=collection_id).filter(display__end_date__gte=today).order_by('artist__artist_sans_accents')
+	artworks = Artwork.objects.filter(display__collection__id=collection_id).filter(display__start_date__lte=today).filter(display__end_date__gte=today).order_by('artist__artist_sans_accents')
 	collection = Collection.objects.get(id=collection_id)
 	paginator = Paginator(artworks, 24)
 

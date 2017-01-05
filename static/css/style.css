@@ -309,7 +309,13 @@ table, form {
 	background-color: #000;
 }
 
-.chart {
+@media (max-width: 700px) {
+
+    .nomobile {
+        display:none;
+    }
+}
+/*.chart {
   width: 100%; 
   min-height: 550px;
-}
+}*/

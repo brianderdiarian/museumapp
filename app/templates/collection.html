@@ -129,9 +129,11 @@
                     <h3>{{artwork.artist}}</h3>
                     <span class="thumb_body">
                         <p>
-                        <i>{{artwork.title|truncatechars:45}}</i></p><p>
-                        {{artwork.date}}</p><p>
-                        {{artwork.medium|truncatechars:45}}</p>
+                        <i>{{artwork.title|truncatechars:45}}</i></p>
+                        {% if artwork.date is not None %}
+                          <p>{{artwork.date}}</p>
+                        {% endif %}
+                        <p>{{artwork.medium|truncatechars:45}}</p>
                         <div class="onviewloc"><p>
                         On view at {{artwork.collection}}
                         </p></div>
@@ -160,7 +162,5 @@
     {% endif %}
     </div>
 {% endif %}
-
-
 
 {% endblock content %}

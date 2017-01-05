@@ -10,7 +10,7 @@ from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import remove_accents, yesterday, today
 from app.models import Artwork, Artist, Collection, NameVariant, Display
 
-class MomaSpider(Spider):
+class BrooklynSpider(Spider):
     name = "brooklynmuseumcon"
     allowed_domains = ["brooklynmuseum.org"]
     start_urls = [

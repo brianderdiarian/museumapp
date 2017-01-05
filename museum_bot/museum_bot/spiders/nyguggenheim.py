@@ -11,7 +11,7 @@ from app.tools import strip_parenthesis, cleanhtml
 from app.tools import remove_accents, today, yesterday
 from app.models import Artwork, Artist, Collection, NameVariant, Display
 
-class MetSpider(Spider):
+class GugSpider(Spider):
     name = "nyguggenheim"
     allowed_domains = ["guggenheim.org"]
     start_urls = [

@@ -55,7 +55,7 @@ class BrooklynSpider(Spider):
 
                 description = "None"
 
-                dimensions = response.xpath('//strong[contains(text(), "DIMENSIONS")]/parent::div[1]/text()').extract()[1].strip()
+                #dimensions = response.xpath('//strong[contains(text(), "DIMENSIONS")]/parent::div[1]/text()').extract()[1].strip()
                 
                 collection = Collection.objects.get(collection_name__contains="Frick")
                 

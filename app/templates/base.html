@@ -18,7 +18,9 @@
 
 		<link rel="shortcut icon" href="{% static 'static/favicon.ico' %}" type="image/x-icon">
 		<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,700|Khula:400,700" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 		
 		<script>
   			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -47,7 +49,7 @@
 		        		<span class="icon-bar"></span>
 		        		<span class="icon-bar"></span>
 		      		</button>
-		      		<a class="navbar-brand" href="{% url 'app:index' %}">art<b>new</b>go</a>
+		      		<a class="navbar-brand" href="{% url 'app:index' %}">art<span style="font-family:Khula; font-weight:700">new</span>go</a>
 		    	</div>
         		<div class="collapse navbar-collapse" id="myNavbar">
             		<ul class="nav navbar-nav">
@@ -106,6 +108,7 @@
 					{% block content %}
 					{% endblock content %}
 				</div>
+				<div id="footer">Copyright © artnewgo 2017</div>
 
 			</div> <!-- /container -->
 

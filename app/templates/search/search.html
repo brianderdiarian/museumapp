@@ -27,7 +27,9 @@
                                 <h3>{{result.object.artwork.artist}}</h3>
                                 <span class="thumb_body">
                                     <p><i>{{result.object.artwork|truncatechars:45}}</i></p>
-                                    <p>{{result.object.artwork.date}}</p>
+                                    {% if artwork.date is not None %}
+                                        <p>{{artwork.date}}</p>
+                                    {% endif %}
                                     <p>{{result.object.artwork.medium|truncatechars:45}}</p>
                                     <div class="onviewloc">
                                         <p>On view at {{result.object.collection}}</p>

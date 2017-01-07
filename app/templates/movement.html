@@ -13,7 +13,9 @@
             </div>
             {% if movement.description %}
             <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">{{ movement.description|linebreaksbr }}</div>
+                <div class="panel-body"><p>{{ movement.description|linebreaksbr }}</p>
+                <p style="text-align: right; padding-right: 20px;"><a href ="https://en.wikipedia.org/wiki/{{movement}}" target='_blank'>From Wikipedia, the free encyclopedia</a></p>
+            </div>
                 <div class="panel-footer"><a href ="https://en.wikipedia.org/wiki/{{movement}}" target='_blank'>From Wikipedia, the free encyclopedia</a></div>
             </div>
             {% endif %}

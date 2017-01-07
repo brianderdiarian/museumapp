@@ -1,14 +1,15 @@
 * {
-	font-family: Arial;
+	font-family: 'Khula', serif;
 }
 
 body {
-	/*padding-top: 70px;*/
+	/*padding-bottom: 70px;*/
 }
 
 .container {
 	position: relative;
     margin: 0 auto;
+    padding-bottom: 50px;
 }
 
 .thumbnail {
@@ -243,15 +244,6 @@ input[type=search]:focus {
 	background: rgba(255,255,255,0.2);
 }
 
-.panel-footer {
-    padding: 10px 15px;
-    background-color: #d8d8d8;
-    border-top: 1px solid #ddd;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    text-align: right;
-}
-
 .panel-group .panel {
     margin-bottom: 0;
     border-radius: 4px;
@@ -263,10 +255,14 @@ input[type=search]:focus {
     background-color: #000000;
     border-color: transparent;
 }
+.panel-body p {
+    font-family: 'Crimson Text';
+    font-size: 17px;
+}
 
 .panel-footer {
     padding: 10px 15px;
-    background-color: #d8d8d8;
+    background-color: #adadad;
     border-top: 1px solid #ddd;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
@@ -319,3 +315,16 @@ table, form {
   width: 100%; 
   min-height: 550px;
 }*/
+
+.jumbotron {
+    text-align: center;
+    background-color: rgba(255,255,255,0.9);
+    padding: 15px;
+}
+
+#footer {
+    font-size: 12px;
+    margin-top: 20px;
+    position:absolute;
+    bottom:0;
+}

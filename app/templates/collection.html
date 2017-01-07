@@ -84,7 +84,10 @@
             </div>
             {% if collection.description %}
             <div id="collapse1" class="panel-collapse collapse">
-                <div class="panel-body">{{ collection.description|linebreaksbr }}<br>
+                <div class="panel-body">
+                  <p style="text-align: center; font-weight: bold;">{{ collection.address }}</p>
+                  <p>{{ collection.description|linebreaksbr }}</p>
+                  <p style="text-align: right; padding-right: 20px;"><a href ="https://en.wikipedia.org/wiki/{{collection}}" target='_blank'>From Wikipedia, the free encyclopedia</a></p>
 
                     <div class="row">
                         <div class="col-6">
@@ -98,7 +101,7 @@
                     </div>
 
                 </div>
-                <div class="panel-footer"><a href ="https://en.wikipedia.org/wiki/{{collection}}" target='_blank'>From Wikipedia, the free encyclopedia</a></div>
+                <div class="panel-footer"></div>
             </div>
             {% endif %}
         </div>

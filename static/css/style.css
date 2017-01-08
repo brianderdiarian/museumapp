@@ -110,6 +110,7 @@ input[type=button], input[type=submit], input[type=reset] {
     background-color: black;
     border: none;
     color: white;
+    font-family: arial, sans-serif;
 }
 
 input[type=search]:focus {

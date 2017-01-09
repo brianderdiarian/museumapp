@@ -1,5 +1,9 @@
 {{ object.artwork|safe }}
 {{ object.artwork.artist|safe }}
+{{ object.artwork.artist.sex }}
+{{ object.artwork.artist.nationality }}
+{{ object.artwork.artist.ethnicity }}
+{{ object.artwork.artist.artist|safe }}
 {{ object.artwork.medium }}
 {{ object.artwork.artist.movements }}
 {{ object.artwork.date }}

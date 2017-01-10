@@ -17,7 +17,7 @@
 {% if displays %}
     {% for display in displays %}
         <div class="thumbnail">
-            <a href ="{{display.artwork.pageurl}}" target="blank">
+            <a href ="{{display.artwork.pageurl}}" target="_blank">
                 <img src="{{display.artwork.imageurl}}" style="border:1px solid gray;">
                 <div class="caption">
                     <h3>{{display.artwork.artist|truncatechars:45}}</h3>

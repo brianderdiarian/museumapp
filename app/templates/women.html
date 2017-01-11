@@ -20,11 +20,11 @@
         <div class="thumbnail">
                                 
              <a href ="{{artist.pageurl}}" target="_blank">
-                <img src="{{artist.imageurl}}" style="border:1px solid gray;">
+                <img src="{{artist.imageurl}}" style="border:1px solid gray;" alt="{{ display.artwork.title|truncatechars:45 }}">
             
                 <div class="caption">
                     <h3>{{artist.artist}}</h3>
-                    <span class="thumb_body">
+                    <div class="thumb_body">
                         <p>
                         <i>{{artist.title|truncatechars:45}}</i></p>
                         {% if artwork.date is not None %}
@@ -35,7 +35,7 @@
                         <div class="onviewloc"><p>
                         On view at {{artist.collection}}
                         </p></div>
-                    </span>
+                    </div>
                 </div>
             </a>
            

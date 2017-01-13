@@ -27,8 +27,8 @@
                     <div class="thumb_body">
                         <p>
                         <i>{{artist.title|truncatechars:45}}</i></p>
-                        {% if artwork.date is not None %}
-                          <p>{{artwork.date}}</p>
+                        {% if artist.date is not None %}
+                          <p>{{artist.date}}</p>
                         {% endif %}
                         <p>
                         {{artist.medium|truncatechars:45}}</p>

@@ -62,31 +62,24 @@
 	                        	</li>
                 			</ul>
                 		</li>				
-
 						<li>
                     		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Movements<b class="caret"></b></a>
-                    		<ul class="dropdown-menu">
-                        		
+                    		<ul class="dropdown-menu">                       		
                         		<li>
                         			{% for movement in movements %}
                             		<a href="/movement/{{ movement.id }}">{{ movement }}</a>
                         			{% endfor %}
-                        		</li>
-                        
-
+                        		</li>                       
                 			</ul>
 						</li>
 						<li>
                     		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Artists<b class="caret"></b></a>
-                    		<ul class="dropdown-menu">
-                        		
+                    		<ul class="dropdown-menu">	
                         		<li>
                         			{% for artist in artists %}
                             		<a href="/artist/{{ artist.id }}">{{ artist|truncatechars:30 }}</a>
                         			{% endfor %}
                         		</li>
-                        
-
                 			</ul>
 						</li>
 						<li><a href="/women">Women Artists</a></li>
@@ -95,20 +88,16 @@
 
 			</div>
 		</nav>
-
-			<div class="container">
-
-				<div class="page-header">
-					{% block header %}
-					{% endblock header %}
-				</div>
-				<div class="main-content">
-					{% block content %}
-					{% endblock content %}
-				</div>
-				<div id="footer">Copyright © artnewgo 2017</div>
-
-			</div> <!-- /container -->
-
+		<div class="container">
+			<div class="page-header">
+				{% block header %}
+				{% endblock header %}
+			</div>
+			<div class="main-content">
+				{% block content %}
+				{% endblock content %}
+			</div>
+			<div id="footer">Copyright © artnewgo 2017</div>
+		</div> <!-- /container -->
 	</body>
 </html>

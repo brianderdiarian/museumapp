@@ -24,22 +24,35 @@ class BrooklynSpider(Spider):
 
             accession_number = "FR" + response.xpath('string(//body)').re(r"\d{4}[.]\d[.]\d+")[0].strip()
 
-            if Artwork.objects.filter(accession_number=accession_number).exists():
-                existing_artwork = Artwork.objects.get(accession_number=accession_number).id
-                if Display.objects.get(artwork_id=existing_artwork).end_date == yesterday:
-                    Display.objects.filter(artwork_id=existing_artwork).update(end_date=today)
+            if Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).exists():
+                Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).update(end_date=today)
 
-                    next_page = response.xpath('//*[@id="pagenav"]/div[contains(@class,"pagenavright")]//@href').extract()[0]
-                    if next_page is not None:
-                        next_page = response.urljoin(next_page)
-                        yield scrapy.Request(next_page, callback=self.parse)
+                next_page = response.xpath('//*[@id="pagenav"]/div[contains(@class,"pagenavright")]//@href').extract()[0]
+                if next_page is not None:
+                    next_page = response.urljoin(next_page)
+                    yield scrapy.Request(next_page, callback=self.parse)
 
+            elif Display.objects.filter(artwork__accession_number=accession_number).exists():
+
+                collection = Collection.objects.get(collection_name__contains="MoMA")
+
+                artwork = Artwork.objects.get(accession_number=accession_number)
+
+                start_date = datetime.date.today().isoformat()
+
+                end_date = datetime.date.today().isoformat()
+
+                yield DisplayItem(
+                    collection = collection,
+                    artwork = artwork,
+                    start_date = start_date,
+                    end_date = end_date,
+                )
                     
-                else:
-                    next_page = response.xpath('//*[@id="pagenav"]/div[contains(@class,"pagenavright")]//@href').extract()[0]
-                    if next_page is not None:
-                        next_page = response.urljoin(next_page)
-                        yield scrapy.Request(next_page, callback=self.parse)
+                next_page = response.xpath('//*[@id="pagenav"]/div[contains(@class,"pagenavright")]//@href').extract()[0]
+                if next_page is not None:
+                    next_page = response.urljoin(next_page)
+                    yield scrapy.Request(next_page, callback=self.parse)
             
             else:
                 artist = response.xpath('.//span[contains(@class, "artistName")]/text()').extract()[0].strip()

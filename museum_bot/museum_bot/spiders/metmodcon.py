@@ -37,12 +37,26 @@ class MetSpider(Spider):
 
             accession_number = "MET" + result['accessionNumber']
 
-            if Artwork.objects.filter(accession_number=accession_number).exists():
-                existing_artwork = Artwork.objects.get(accession_number=accession_number).id
-                if Display.objects.get(artwork_id=existing_artwork).end_date == yesterday:
-                    Display.objects.filter(artwork_id=existing_artwork).update(end_date=today)
-                else:
-                    continue
+            if Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).exists():
+                Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).update(end_date=today)
+
+            elif Display.objects.filter(artwork__accession_number=accession_number).exists():
+
+                collection = Collection.objects.get(collection_name__contains="MoMA")
+
+                artwork = Artwork.objects.get(accession_number=accession_number)
+
+                start_date = datetime.date.today().isoformat()
+
+                end_date = datetime.date.today().isoformat()
+
+                yield DisplayItem(
+                    collection = collection,
+                    artwork = artwork,
+                    start_date = start_date,
+                    end_date = end_date,
+                )
+                
             else:
                 if result['description'] == " ":
                     artist = "Unknown Artist"

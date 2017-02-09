@@ -22,7 +22,7 @@
         var data = google.visualization.arrayToDataTable([
           ['Movement', 'Artworks On View'],
           {% for movement in movement_tally %}
-            ['{{ movement.artist__movement__movement }}',     {{ movement.artist__count }}],
+            ['{{ movement.artwork__artist__movement__movement }}',     {{ movement.artwork__artist__count }}],
           {% endfor %}
           
         ]);

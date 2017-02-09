@@ -48,7 +48,7 @@ class MetSpider(Spider):
 
             elif Display.objects.filter(artwork__accession_number=accession_number).exists():
 
-                collection = Collection.objects.get(collection_name__contains="MoMA")
+                collection = Collection.objects.get(collection_name__contains="Whitney")
 
                 artwork = Artwork.objects.get(accession_number=accession_number)
 

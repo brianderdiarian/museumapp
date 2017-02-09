@@ -49,7 +49,12 @@ class MetSpider(Spider):
 
             elif Display.objects.filter(artwork__accession_number=accession_number).exists():
 
-                collection = Collection.objects.get(collection_name__contains="MoMA")
+                collection = remove_tags(result['galleryInformation'])
+
+                if "Fifth" in collection:
+                    collection = Collection.objects.get(collection_name__contains="Fifth")
+                else:
+                    collection = Collection.objects.get(collection_name__contains="Breuer")
 
                 artwork = Artwork.objects.get(accession_number=accession_number)
 

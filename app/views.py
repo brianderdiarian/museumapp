@@ -39,7 +39,7 @@ def index(request):
 # 	return render(request, 'new.html', context)
 
 def women(request):
-	femaleArtists_list = Display.objects.filter(artwork__artist__sex="Female").exclude(start_date__lt=today).exclude(end_date__gt=today).order_by('artwork__artist__artist_sans_accents')
+	femaleArtists_list = Display.objects.filter(artwork__artist__sex="Female").exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents')
 
 	paginator = Paginator(femaleArtists_list, 24)
 

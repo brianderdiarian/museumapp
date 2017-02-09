@@ -99,7 +99,7 @@ def artist(request, artist_id):
 	return render(request, 'artist.html', context)
 
 def collection(request, collection_id):
-	artworks = Artwork.objects.filter(display__collection__id=collection_id).exclude(display__end_date__lt=today).exclude(display__end_date__gt=today).order_by('artist__artist_sans_accents')
+	artworks = Artwork.objects.filter(display__collection__id=collection_id).exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).order_by('artist__artist_sans_accents')
 	collection = Collection.objects.get(id=collection_id)
 	paginator = Paginator(artworks, 24)
 
@@ -113,11 +113,11 @@ def collection(request, collection_id):
 	except(EmptyPage, InvalidPage):
 		artworks = paginator.page(paginator.num_pages)
 
-	movement_tally = Artwork.objects.filter(display__collection=collection).exclude(display__end_date__lt=today).exclude(display__end_date__gt=today).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
+	movement_tally = Artwork.objects.filter(display__collection=collection).exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
 
-	male = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Male").exclude(display__end_date__lt=today).exclude(display__end_date__gt=today).count()
-	female = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Female").exclude(display__end_date__lt=today).exclude(display__end_date__gt=today).count()
-	unknown = Artwork.objects.filter(display__collection=collection).filter(artist__sex="").exclude(display__end_date__lt=today).exclude(display__end_date__gt=today).count()
+	male = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Male").exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).count()
+	female = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Female").exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).count()
+	unknown = Artwork.objects.filter(display__collection=collection).filter(artist__sex="").exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).count()
 
 	context = { 'artworks': artworks,
 				'collection': collection,

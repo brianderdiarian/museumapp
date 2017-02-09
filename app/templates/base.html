@@ -57,7 +57,11 @@
                 			<ul class="dropdown-menu">
                 				<li>
 	                    			{% for collection in collections %}
-	                            		<a href="/collection/{{ collection.id }}">{{ collection|title }}</a>
+	                            		{% if collection.collection_name == "MoMA" %}
+	                            			<a href="/collection/{{ collection.id }}">{{ collection }}</a>
+	                            		{% else %}
+	                            			<a href="/collection/{{ collection.id }}">{{ collection|title }}</a>
+	                            		{% endif %}
 	                        		{% endfor %}
 	                        	</li>
                 			</ul>

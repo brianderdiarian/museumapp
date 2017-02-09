@@ -39,7 +39,7 @@ def index(request):
 # 	return render(request, 'new.html', context)
 
 def women(request):
-	femaleArtists_list = Artwork.objects.filter(artist__sex="Female").filter(display__start_date__lte=today).filter(display__end_date__gte=today).order_by('artist__artist_sans_accents')
+	femaleArtists_list = Display.objects.filter(artwork__artist__sex="Female").exclude(start_date__lt=today).exclude(end_date__gt=today).order_by('artwork__artist__artist_sans_accents')
 
 	paginator = Paginator(femaleArtists_list, 24)
 
@@ -59,9 +59,9 @@ def women(request):
 	return render(request, 'women.html', context)
 
 def movement(request, movement_id):
-	artworks = Artwork.objects.filter(artist__movement__id=movement_id).filter(display__start_date__lte=today).filter(display__end_date__gte=today).order_by('artist__artist_sans_accents')
+	displays = Display.objects.filter(artwork__artist__movement__id=movement_id).exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents')
 	movement = Movement.objects.get(id=movement_id)
-	paginator = Paginator(artworks, 24)
+	paginator = Paginator(displays, 24)
 
 	try:
 		page = int(request.GET.get('page', '1'))
@@ -69,19 +69,19 @@ def movement(request, movement_id):
 		page = 1
 
 	try:
-		artworks = paginator.page(page)
+		displays = paginator.page(page)
 	except(EmptyPage, InvalidPage):
-		artworks = paginator.page(paginator.num_pages)
+		displays = paginator.page(paginator.num_pages)
 
-	context = { 'artworks': artworks,
+	context = { 'displays': displays,
 				'movement': movement, }
 
 	return render(request, 'movement.html', context)
 
 def artist(request, artist_id):
-	artworks = Artwork.objects.filter(artist__id=artist_id).filter(display__start_date__lte=today).filter(display__end_date__gte=today)
+	displays = Display.objects.filter(artwork__artist__id=artist_id).exclude(end_date__lt=today).exclude(start_date__gt=today)
 	artist = Artist.objects.get(id=artist_id)
-	paginator = Paginator(artworks, 24)
+	paginator = Paginator(displays, 24)
 
 	try:
 		page = int(request.GET.get('page', '1'))
@@ -89,19 +89,19 @@ def artist(request, artist_id):
 		page = 1
 
 	try:
-		artworks = paginator.page(page)
+		displays = paginator.page(page)
 	except(EmptyPage, InvalidPage):
-		artworks = paginator.page(paginator.num_pages)
+		displays = paginator.page(paginator.num_pages)
 
-	context = { 'artworks': artworks,
+	context = { 'displays': displays,
 				'artist': artist, }
 
 	return render(request, 'artist.html', context)
 
 def collection(request, collection_id):
-	artworks = Artwork.objects.filter(display__collection__id=collection_id).exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).order_by('artist__artist_sans_accents')
+	displays = Display.objects.filter(collection__id=collection_id).exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents')
 	collection = Collection.objects.get(id=collection_id)
-	paginator = Paginator(artworks, 24)
+	paginator = Paginator(displays, 24)
 
 	try:
 		page = int(request.GET.get('page', '1'))
@@ -109,17 +109,17 @@ def collection(request, collection_id):
 		page = 1
 
 	try:
-		artworks = paginator.page(page)
+		displays = paginator.page(page)
 	except(EmptyPage, InvalidPage):
-		artworks = paginator.page(paginator.num_pages)
+		displays = paginator.page(paginator.num_pages)
 
-	movement_tally = Artwork.objects.filter(display__collection=collection).exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
+	movement_tally = Display.objects.filter(collection=collection).exclude(end_date__lt=today).exclude(start_date__gt=today).values('artwork__artist__movement__movement').annotate(Count('artwork__artist')).order_by('artwork__artist__movement__movement')
 
-	male = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Male").exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).count()
-	female = Artwork.objects.filter(display__collection=collection).filter(artist__sex__contains="Female").exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).count()
-	unknown = Artwork.objects.filter(display__collection=collection).filter(artist__sex="").exclude(display__end_date__lt=today).exclude(display__start_date__gt=today).count()
+	male = Display.objects.filter(collection=collection).filter(artwork__artist__sex__contains="Male").exclude(end_date__lt=today).exclude(start_date__gt=today).count()
+	female = Display.objects.filter(collection=collection).filter(artwork__artist__sex__contains="Female").exclude(end_date__lt=today).exclude(start_date__gt=today).count()
+	unknown = Display.objects.filter(collection=collection).filter(artwork__artist__sex="").exclude(end_date__lt=today).exclude(start_date__gt=today).count()
 
-	context = { 'artworks': artworks,
+	context = { 'displays': displays,
 				'collection': collection,
 				'movement_tally': movement_tally,
 				'male': male,

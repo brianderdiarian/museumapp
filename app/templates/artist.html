@@ -9,7 +9,7 @@
     </form>
     <br>
         <div class="counter">
-            <p>Results {{ artworks.start_index }} - {{ artworks.end_index }} of {{ artworks.paginator.count }}</p>
+            <p>Results {{ displays.start_index }} - {{ displays.end_index }} of {{ displays.paginator.count }}</p>
         </div>
     <br>
         <div class="artist-description">
@@ -18,29 +18,29 @@
             <p>{{ artist.born }} - {{ artist.died }}</p>
         </div>
 
-{% if artworks %}
+{% if displays %}
 
-    {% for artwork in artworks %}
+    {% for display in displays %}
 
         <div class="thumbnail">
                                 
-             <a href ="{{artwork.pageurl}}" target="_blank">
-                <img src="{{artwork.imageurl}}" style="border:1px solid gray;" alt="{{ artwork.title|truncatechars:45 }}">
+             <a href ="{{display.artwork.pageurl}}" target="_blank">
+                <img src="{{display.artwork.imageurl}}" style="border:1px solid gray;" alt="{{ display.artwork.title|truncatechars:45 }}">
             
                 <div class="caption">
-                    <h3>{{artwork.artist}}</h3>
+                    <h3>{{display.artwork.artist}}</h3>
                     <div class="thumb_body">
                         <p>
-                        <i>{{artwork.title|truncatechars:45}}</i></p>
+                        <i>{{display.artwork.title|truncatechars:45}}</i></p>
 
-                        {% if artwork.date is not None %}
-                          <p>{{artwork.date}}</p>
+                        {% if display.artwork.date is not None %}
+                          <p>{{display.artwork.date}}</p>
                         {% endif %}
 
                         <p>
-                        {{artwork.medium|truncatechars:45}}</p>
+                        {{display.artwork.medium|truncatechars:45}}</p>
                         <div class="onviewloc"><p>
-                        On view at {{artwork.collection}}
+                        On view at {{display.artwork.collection}}
                         </p></div>
                     </div>
                 </div>
@@ -51,16 +51,16 @@
 
     {% endfor %}
     <div class="prevnext">
-    {% if artworks.has_previous %}
-            {% if artworks.has_previous %}
-                <a href="?q={{ query }}&amp;page={{ artworks.previous_page_number }}">
+    {% if displays.has_previous %}
+            {% if displays.has_previous %}
+                <a href="?q={{ query }}&amp;page={{ displays.previous_page_number }}">
                     <button type="button" class="btn btn-default"><< Previous</button>
                 </a>
             {% endif %}
     {% endif %}
-    {% if artworks.has_next %}
-            {% if artworks.has_next %}
-                <a href="?q={{ query }}&amp;page={{ artworks.next_page_number }}">
+    {% if displays.has_next %}
+            {% if displays.has_next %}
+                <a href="?q={{ query }}&amp;page={{ displays.next_page_number }}">
                     <button type="button" class="btn btn-default">Next >></button>
                 </a>
             {% endif %}

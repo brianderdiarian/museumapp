@@ -81,7 +81,7 @@
                     		<ul class="dropdown-menu">	
                         		<li>
                         			{% for artist in artists %}
-                            		<a href="/artist/{{ artist.id }}">{{ artist|truncatechars:30 }}</a>
+                            		<a href="/artist/{{ artist.artwork.artist.id }}">{{ artist.artwork.artist|truncatechars:30 }}</a>
                         			{% endfor %}
                         		</li>
                 			</ul>

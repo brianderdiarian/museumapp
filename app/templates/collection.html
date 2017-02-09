@@ -81,9 +81,9 @@
                 <p class="panel-title">
                     <a data-toggle="collapse" href="#collapse1">
                     {% if collection.collection_name == "MoMA" %}
-                      <a href="/collection/{{ collection.id }}">{{ collection }}</a>
+                      {{ collection }}
                     {% else %}
-                      <a href="/collection/{{ collection.id }}">{{ collection|title }}</a>
+                      {{ collection|title }}
                     {% endif %}
                     <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span></a>
                 </p>

@@ -26,7 +26,7 @@ EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 
 def index(request):
     #artists = Artwork.objects.filter(timestamp__gte=current).order_by('?')[:12]
-    displays = Display.objects.filter(start_date__lte=today).filter(end_date__gte=today).exclude(artwork__imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").order_by('-start_date')[:12].select_related('artwork')
+    displays = Display.objects.filter(start_date__lte=today).filter(end_date__gte=today).exclude(artwork__imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").order_by('-start_date')[:12]
     context={'displays': displays}
     return render(request, 'index.html', context)
 
@@ -39,7 +39,7 @@ def index(request):
 # 	return render(request, 'new.html', context)
 
 def women(request):
-	femaleArtists_list = Display.objects.filter(artwork__artist__sex="Female").exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents').select_related('artwork')
+	femaleArtists_list = Display.objects.filter(artwork__artist__sex="Female").exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents')
 
 	paginator = Paginator(femaleArtists_list, 24)
 
@@ -59,7 +59,7 @@ def women(request):
 	return render(request, 'women.html', context)
 
 def movement(request, movement_id):
-	displays = Display.objects.filter(artwork__artist__movement__id=movement_id).exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents').select_related('artwork')
+	displays = Display.objects.filter(artwork__artist__movement__id=movement_id).exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents')
 	movement = Movement.objects.get(id=movement_id)
 	paginator = Paginator(displays, 24)
 
@@ -99,7 +99,7 @@ def artist(request, artist_id):
 	return render(request, 'artist.html', context)
 
 def collection(request, collection_id):
-	displays = Display.objects.filter(collection__id=collection_id).exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents').select_related('artwork')
+	displays = Display.objects.filter(collection__id=collection_id).exclude(end_date__lt=today).exclude(start_date__gt=today).order_by('artwork__artist__artist_sans_accents')
 	collection = Collection.objects.get(id=collection_id)
 	paginator = Paginator(displays, 24)
 

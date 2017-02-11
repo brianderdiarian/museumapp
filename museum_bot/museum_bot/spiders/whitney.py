@@ -147,5 +147,5 @@ class MetSpider(Spider):
                         start_date = start_date,
                         end_date = end_date,
                     )
-                except:
-                    continue
+            except:
+                continue

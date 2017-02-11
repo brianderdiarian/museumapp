@@ -58,7 +58,7 @@ def women(request):
 	return render(request, 'women.html', context)
 
 def movement(request, movement_id):
-	displays = Artwork.objects.filter(artist__sex="Female").filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().order_by('artist__artist_sans_accents')
+	displays = Artwork.objects.filter(artist__movement__id=movement_id).filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().order_by('artist__artist_sans_accents')
 	movement = Movement.objects.get(id=movement_id)
 	paginator = Paginator(displays, 24)
 

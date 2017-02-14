@@ -46,7 +46,7 @@ class MomaSpider(Spider):
     def parse_artwork(self, response):
         global Artwork
         
-        accession_number = "MOMA" + response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dt[contains(text(), "Object number")]/following-sibling::dd[1]/text()').extract()[0].strip()
+        accession_number = "MOMA" + response.xpath('//*[contains(text(), "Object number")]/following-sibling::dd[1]/text()').extract()[0].strip()
 
         if Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).exists():
             Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).update(end_date=today)
@@ -83,14 +83,14 @@ class MomaSpider(Spider):
 
             date = response.xpath('/html/body/div[3]/div/div/div[1]/div/div/h3/text()').extract()[0].strip()
 
-            medium = response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dt[contains(text(), "Medium")]/following-sibling::dd[1]/text()').extract()[0].strip()
+            medium = response.xpath('//*[contains(text(), "Medium")]/following-sibling::dd[1]/text()').extract()[0].strip()
      
             try:
                 description = response.xpath('/html/body/div[3]/div[1]/section[2]/div/div[2]/div[1]/p[1]/text()').extract()[0].strip()
             except:
                 description = "None"
 
-            dimensions = response.xpath('/html/body/div[3]/div/div/div[1]/section[2]/div/div[1]/div[1]/dl/dd[2]/text()').extract()[0].strip()
+            dimensions = response.xpath('//*[contains(text(), "Dimensions")]/following-sibling::dd[1]/text()').extract()[0].strip()
 
             collection = Collection.objects.get(collection_name__contains="MoMA")
 

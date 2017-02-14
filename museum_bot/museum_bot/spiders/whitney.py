@@ -44,7 +44,10 @@ class MetSpider(Spider):
             try:
                 accession_number = "WHIT" + result['accession_number']
 
-                if Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).exists():
+                if Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=today).exists():
+                    continue
+
+                elif Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).exists():
                     Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).update(end_date=today)
 
                 elif Display.objects.filter(artwork__accession_number=accession_number).exists():

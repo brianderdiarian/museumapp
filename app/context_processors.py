@@ -6,7 +6,7 @@ def movement_processor(request):
 	movements = Movement.objects.filter(artist__artwork__display__end_date__gte=today).order_by('movement').distinct()
 	#movements = sorted(set(movements))
 
-	artists = Artwork.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('artist__artist_sans_accents').distinct('artist__artist_sans_accents')
+	artists = Artist.objects.filter(artwork__display__end_date__gte=today).filter(artwork__display__start_date__lte=today).order_by('artist_sans_accents').distinct('artist_sans_accents').select_related()
 
 	collections = Collection.objects.filter(display__start_date__lte=today).filter(display__end_date__gte=today).annotate(num_displays=Count('display')).order_by('-num_displays').distinct()
 

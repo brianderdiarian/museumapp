@@ -33,6 +33,7 @@ class Artist(models.Model):
 	new_nationality = models.ManyToManyField(Nationality, blank=True)
 	ethnicity = models.ForeignKey(Ethnicity, null=True, blank=True)
 	movement = models.ManyToManyField(Movement, blank=True)
+	description = models.TextField(null=True, blank=True)
 
 	def get_movements(self):
 		return ",".join([str(p) for p in self.movement.all()])

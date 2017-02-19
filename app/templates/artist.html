@@ -9,11 +9,11 @@
                 <p class="panel-title">
                     {% if artist.description %}
                         {% if artist.born and artist.nationality %}
-                        <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }}) b. {{ artist.born }}
+                        <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }}) b.{{ artist.born }}
                             <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
                         </a>
                         {% elif artist.born %}
-                        <a data-toggle="collapse" href="#collapse1">{{ artist }} b. {{ artist.born }}
+                        <a data-toggle="collapse" href="#collapse1">{{ artist }} b.{{ artist.born }}
                             <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
                         </a>
                         {% elif artist.nationality %}
@@ -27,9 +27,9 @@
                         {% endif %}
                     {% else %}
                         {% if artist.born and artist.nationality %}
-                            {{ artist }} ({{ artist.nationality }}) b. {{ artist.born }}
+                            {{ artist }} ({{ artist.nationality }}) b.{{ artist.born }}
                         {% elif artist.born %}
-                            {{ artist }} b. {{ artist.born }}
+                            {{ artist }} b.{{ artist.born }}
                         {% elif artist.nationality %}
                             {{ artist }} ({{ artist.nationality }})
                         {% else %}

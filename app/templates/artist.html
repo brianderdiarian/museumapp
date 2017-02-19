@@ -3,6 +3,41 @@
 
 {% block content %}
 
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <p class="panel-title">
+                    {% if artist.born and artist.nationality %}
+                    <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }}) b. {{ artist.born }}
+                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                    </a>
+                    {% elif artist.born %}
+                    <a data-toggle="collapse" href="#collapse1">{{ artist }} b. {{ artist.born }}
+                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                    </a>
+                    {% elif artist.nationality %}
+                    <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }})
+                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                    </a>
+                    {% else %}
+                    <a data-toggle="collapse" href="#collapse1">{{ artist }}
+                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                    </a>
+                    {% endif %}
+                </p>
+            </div>
+            {% if artist.description %}
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body"><p>{{ artist.description|linebreaksbr }}</p>
+                <p style="text-align: right; padding-right: 20px;"><a href ="https://en.wikipedia.org/wiki/{{artist}}" target='_blank'>From Wikipedia, the free encyclopedia</a></p>
+            </div>
+                <div class="panel-footer"></div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+
     <form class="search" action="/search/" method="get">
         <input type="search" name="q">
         <input type="submit" value="Search">
@@ -12,11 +47,6 @@
             <p>Results {{ displays.start_index }} - {{ displays.end_index }} of {{ displays.paginator.count }}</p>
         </div>
     <br>
-        <div class="artist-description">
-            <h2 id="artist">{{ artist|truncatechars:28 }}</h2>
-            <p>{{ artist.nationality }}</p>
-            <p>{{ artist.born }} - {{ artist.died }}</p>
-        </div>
 
 {% if displays %}
 

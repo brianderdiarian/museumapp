@@ -7,22 +7,34 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <p class="panel-title">
-                    {% if artist.born and artist.nationality %}
-                    <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }}) b. {{ artist.born }}
-                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
-                    </a>
-                    {% elif artist.born %}
-                    <a data-toggle="collapse" href="#collapse1">{{ artist }} b. {{ artist.born }}
-                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
-                    </a>
-                    {% elif artist.nationality %}
-                    <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }})
-                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
-                    </a>
+                    {% if artist.description %}
+                        {% if artist.born and artist.nationality %}
+                        <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }}) b. {{ artist.born }}
+                            <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                        </a>
+                        {% elif artist.born %}
+                        <a data-toggle="collapse" href="#collapse1">{{ artist }} b. {{ artist.born }}
+                            <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                        </a>
+                        {% elif artist.nationality %}
+                        <a data-toggle="collapse" href="#collapse1">{{ artist }} ({{ artist.nationality }})
+                            <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                        </a>
+                        {% else %}
+                        <a data-toggle="collapse" href="#collapse1">{{ artist }}
+                            <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
+                        </a>
+                        {% endif %}
                     {% else %}
-                    <a data-toggle="collapse" href="#collapse1">{{ artist }}
-                        <span class="glyphicon glyphicon-chevron-down" style="float:right; line-height: 33px"></span>
-                    </a>
+                        {% if artist.born and artist.nationality %}
+                            {{ artist }} ({{ artist.nationality }}) b. {{ artist.born }}
+                        {% elif artist.born %}
+                            {{ artist }} b. {{ artist.born }}
+                        {% elif artist.nationality %}
+                            {{ artist }} ({{ artist.nationality }})
+                        {% else %}
+                            {{ artist }}
+                        {% endif %}
                     {% endif %}
                 </p>
             </div>

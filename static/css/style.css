@@ -2,6 +2,14 @@
 	font-family: 'Khula', serif;
 }
 
+a {
+    color: #000000;
+}
+
+a:hover {
+    color: #999999;
+}
+
 body {
 	/*padding-bottom: 70px;*/
 }
@@ -339,4 +347,9 @@ table, form {
 
 .dropdown-menu>li>a {
     color: #ff9156;
+}
+
+.artist-link {
+    font-size: 13px;
+    font-weight: bold;
 }

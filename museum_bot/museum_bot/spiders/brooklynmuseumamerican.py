@@ -7,7 +7,7 @@ import time
 from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
 from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
-from app.tools import remove_accents, yesterday, today
+from app.tools import remove_accents, yesterday, today, bkfailsafe
 from app.models import Artwork, Artist, Collection, NameVariant, Display
 
 class BrooklynSpider(Spider):
@@ -37,6 +37,11 @@ class BrooklynSpider(Spider):
         #'https://www.brooklynmuseum.org/opencollection/objects?offset=600&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
     ]
 
+    # check if spider has already run today and, if yes, abort
+    if LastCrawl.objects.filter(spider_name=name).filter(last_crawled=today).exists():
+        sys.exit()
+    else:
+        LastCrawl.objects.filter(spider_name=name).update(last_crawled=today)
 
     def parse(self, response):
         for href in response.xpath('/html/body/div[3]/div[5]/div/div[3]//a/@href'):    
@@ -48,8 +53,8 @@ class BrooklynSpider(Spider):
 
         accession_number = "BM" + response.xpath('//strong[contains(text(), "ACCESSION NUMBER")]/parent::div[1]/text()').extract()[1].strip()
 
-        if Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).exists():
-            Display.objects.filter(artwork__accession_number=accession_number).filter(end_date=yesterday).update(end_date=today)
+        if Display.objects.filter(artwork__accession_number=accession_number).filter(end_date__gte=bkfailsafe).exists():
+            Display.objects.filter(artwork__accession_number=accession_number).filter(end_date__gte=bkfailsafe).update(end_date=today)
 
         elif Display.objects.filter(artwork__accession_number=accession_number).exists():
 

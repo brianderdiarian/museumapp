@@ -17,6 +17,12 @@ class BrooklynSpider(Spider):
         'http://collections.frick.org/view/objects/asitem/152/1/',
     ]
 
+    # check if spider has already run today and, if yes, abort
+    if LastCrawl.objects.filter(spider_name=name).filter(last_crawled=today).exists():
+        sys.exit()
+    else:
+        LastCrawl.objects.filter(spider_name=name).update(last_crawled=today)
+
     def parse(self, response):
         global Artwork
 

@@ -22,16 +22,23 @@
                 <div class="caption">
                     <h3>{{display.artist|truncatechars:45}}</h3>
                     <div class="thumb_body">
-                        <p><i>{{display.title|truncatechars:45}}</i></p>
-                        {% if display.date is not None %}
-                          <p>{{ display.date }}</p>
-                        {% endif %}
-                        <p>{{display.medium|truncatechars:45}}</p>
+                        <ul id="thumb-info-list">
+                            <li><b><i>{{display.title|truncatechars:45}}</i></b></li>
+                            {% if display.date is not None %}
+                              <li>{{ display.date }}</li>
+                            {% endif %}
+                            <li>{{display.medium|truncatechars:45}}</li>
+                        </ul>
                         <div class="onviewloc">
                             <p>On view at {{display.collection}}</p>
                         </div>
                         <div class="artist-link">
-                            <a href="/artist/{{display.artist.id}}">More of<br>{{display.artist}} >></a>
+                            <p><a href="/artist/{{display.artist.id}}">More of<br>{{display.artist}} >></a></p>
+                        </div>
+                        <div class="movement-link">
+                            {% for m in display.artist.movement.all %}
+                            <a href="/movement/{{ m.id }}">{{ m.movement }} >></a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

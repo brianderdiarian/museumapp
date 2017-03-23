@@ -25,6 +25,11 @@ class MetSpider(Spider):
         'http://www.metmuseum.org/api/collection/collectionlisting?artist=&department=21&era=&geolocation=&material=&offset=600&pageSize=0&perPage=100&showOnly=onDisplay&sortBy=Relevance&sortOrder=asc',
     ]
 
+    # check if spider has already run today and, if yes, abort
+    if LastCrawl.objects.filter(spider_name=name).filter(last_crawled=today).exists():
+        sys.exit()
+    else:
+        LastCrawl.objects.filter(spider_name=name).update(last_crawled=today)
 
     def parse(self, response):
         global Artwork

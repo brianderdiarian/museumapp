@@ -89,3 +89,10 @@ class Info(models.Model):
 
 	def __str__(self):
 		return self.about
+
+class LastCrawl(models.Model):
+	spider_name = models.CharField(max_length=255)
+	last_crawled = models.DateField(auto_now=False, null=True)
+
+	def __str__(self):
+		return self.spider_name

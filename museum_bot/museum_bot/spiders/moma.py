@@ -36,6 +36,11 @@ class MomaSpider(Spider):
         'http://www.moma.org/collection/works?utf8=%E2%9C%93&q=&classifications=&on_view=1&page=20&direction=fwd',
     ]
 
+    # check if spider has already run today and, if yes, abort
+    if LastCrawl.objects.filter(spider_name=name).filter(last_crawled=today).exists():
+        sys.exit()
+    else:
+        LastCrawl.objects.filter(spider_name=name).update(last_crawled=today)
 
     def parse(self, response):
 

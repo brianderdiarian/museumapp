@@ -18,6 +18,11 @@ class GugSpider(Spider):
         'https://www.guggenheim.org/wp-json/wp/v2/artwork?filter%5Bcategory_name%5D=on-view-in-new-york&per_page=100',
     ]
 
+    # check if spider has already run today and, if yes, abort
+    if LastCrawl.objects.filter(spider_name=name).filter(last_crawled=today).exists():
+        sys.exit()
+    else:
+        LastCrawl.objects.filter(spider_name=name).update(last_crawled=today)
 
     def parse(self, response):
 

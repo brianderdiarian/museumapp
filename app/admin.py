@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 #from django.contrib import admin
-from app.models import Artwork, Artist, Collection, Display, NameVariant, Movement, Ethnicity, Nationality, Info
+from app.models import Artwork, Artist, Collection, Display, NameVariant, Movement, Ethnicity, Nationality, Info, LastCrawl
 
 class ArtworkAdmin(admin.ModelAdmin):
 	list_display = ('artist', 'title', 'collection', 'timestamp',)
@@ -50,3 +50,7 @@ admin.site.register(Nationality)
 class InfoAdmin(admin.ModelAdmin):
     list_display = ('about',)
 admin.site.register(Info, InfoAdmin)
+
+class LastCrawlAdmin(admin.ModelAdmin):
+    list_display = ('spider_name',)
+admin.site.register(LastCrawl, LastCrawlAdmin)

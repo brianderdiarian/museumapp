@@ -33,7 +33,7 @@ def cleanhtml(raw_html):
 #show most recent results - yesterday to be safe that all indexes are complete
 today = date.today()
 yesterday = (date.today() - timedelta(1))
-bkfailsafe = (date.today() - timedelta(4))
+skipcatch = (date.today() - timedelta(15))
 
 
 current = date.today()

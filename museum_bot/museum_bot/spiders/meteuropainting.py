@@ -167,4 +167,4 @@ if LastCrawl.objects.get(spider_name="meteuropainting").last_crawled != today:
         # def spider_opened(self, spider):
 
         def spider_closed(self, spider):
-            LastCrawl.objects.filter(spider_name="brooklynmuseumamerican").update(last_crawled=today)
+            LastCrawl.objects.filter(spider_name="meteuropainting").update(last_crawled=today)

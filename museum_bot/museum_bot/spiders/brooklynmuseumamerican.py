@@ -7,33 +7,34 @@ import sys
 
 from museum_project.settings import BASE_DIR
 from scrapy.spiders import Spider
+from scrapy import signals
 from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import remove_accents, yesterday, today, skipcatch
 from app.models import Artwork, Artist, Collection, NameVariant, Display, LastCrawl
 
 if LastCrawl.objects.get(spider_name="brooklynmuseumamerican").last_crawled != today:
 
-    class BrooklynSpider(Spider):
+    class BrooklynAmericanSpider(Spider):
         name = "brooklynmuseumamerican"
         allowed_domains = ["brooklynmuseum.org"]
         start_urls = [
-            'https://www.brooklynmuseum.org/opencollection/objects?collection_id=9&object_year_begin=1850&on_view_only=1&x=9&y=18',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=30&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=60&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=90&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=120&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=150&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=180&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=210&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=240&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=270&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=300&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=330&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=360&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=390&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=420&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            'https://www.brooklynmuseum.org/opencollection/objects?offset=450&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
-            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=480&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?collection_id=9&object_year_begin=1850&on_view_only=1&x=9&y=18',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=30&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=60&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=90&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=120&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=150&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=180&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=210&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=240&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=270&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=300&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=330&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=360&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=390&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            # 'https://www.brooklynmuseum.org/opencollection/objects?offset=420&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            #'https://www.brooklynmuseum.org/opencollection/objects?offset=450&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
+            'https://www.brooklynmuseum.org/opencollection/objects?offset=480&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
             # 'https://www.brooklynmuseum.org/opencollection/objects?offset=510&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
             # 'https://www.brooklynmuseum.org/opencollection/objects?offset=5400&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
             # 'https://www.brooklynmuseum.org/opencollection/objects?offset=570&limit=30&object_year_begin=1850&on_view_only=1&collection_id=9',
@@ -148,7 +149,17 @@ if LastCrawl.objects.get(spider_name="brooklynmuseumamerican").last_crawled != t
                     start_date = start_date,
                     end_date = end_date,
                 )
-            # else:
-            #     pass
 
-    LastCrawl.objects.filter(spider_name="brooklynmuseumamerican").update(last_crawled=today)
+        @classmethod
+        def from_crawler(cls, crawler, *args, **kwargs):
+            spider = super(BrooklynAmericanSpider, cls).from_crawler(crawler, *args, **kwargs)
+            # crawler.signals.connect(spider.spider_opened, signals.spider_opened)
+            crawler.signals.connect(spider.spider_closed, signals.spider_closed)
+            return spider
+            
+        # def spider_opened(self, spider):
+
+        def spider_closed(self, spider):
+            LastCrawl.objects.filter(spider_name="brooklynmuseumamerican").update(last_crawled=today)
+
+

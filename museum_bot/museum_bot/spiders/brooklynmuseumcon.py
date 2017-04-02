@@ -13,7 +13,7 @@ from app.models import Artwork, Artist, Collection, NameVariant, Display, LastCr
 
 if LastCrawl.objects.get(spider_name="brooklynmuseumcon").last_crawled != today:
 
-    class BrooklynSpider(Spider):
+    class BrooklynConSpider(Spider):
         name = "brooklynmuseumcon"
         allowed_domains = ["brooklynmuseum.org"]
         start_urls = [
@@ -128,7 +128,14 @@ if LastCrawl.objects.get(spider_name="brooklynmuseumcon").last_crawled != today:
                     end_date = end_date,
                 )
 
-                #else:
-                    #pass
+        @classmethod
+        def from_crawler(cls, crawler, *args, **kwargs):
+            spider = super(BrooklynConSpider, cls).from_crawler(crawler, *args, **kwargs)
+            # crawler.signals.connect(spider.spider_opened, signals.spider_opened)
+            crawler.signals.connect(spider.spider_closed, signals.spider_closed)
+            return spider
+            
+        # def spider_opened(self, spider):
 
-    LastCrawl.objects.filter(spider_name="brooklynmuseumcon").update(last_crawled=today)
+        def spider_closed(self, spider):
+            LastCrawl.objects.filter(spider_name="brooklynmuseumamerican").update(last_crawled=today)

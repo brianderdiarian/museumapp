@@ -12,7 +12,7 @@ from app.models import Artwork, Artist, Collection, NameVariant, Display, LastCr
 
 if LastCrawl.objects.get(spider_name="frickpainting").last_crawled != today:
 
-    class BrooklynSpider(Spider):
+    class FrickSpider(Spider):
         name = "frickpainting"
         allowed_domains = ["collections.frick.org"]
         start_urls = [
@@ -130,6 +130,8 @@ if LastCrawl.objects.get(spider_name="frickpainting").last_crawled != today:
                     if next_page is not None:
                         next_page = response.urljoin(next_page)
                         yield scrapy.Request(next_page, callback=self.parse)
+
+                LastCrawl.objects.filter(spider_name="frickpainting").update(last_crawled=today)
                 
             else:
                 next_page = response.xpath('//*[@id="pagenav"]/div[contains(@class,"pagenavright")]//@href').extract()[0]
@@ -137,4 +139,15 @@ if LastCrawl.objects.get(spider_name="frickpainting").last_crawled != today:
                     next_page = response.urljoin(next_page)
                     yield scrapy.Request(next_page, callback=self.parse)
 
-    LastCrawl.objects.filter(spider_name="frickpainting").update(last_crawled=today)
+        @classmethod
+        def from_crawler(cls, crawler, *args, **kwargs):
+            spider = super(FrickSpider, cls).from_crawler(crawler, *args, **kwargs)
+            # crawler.signals.connect(spider.spider_opened, signals.spider_opened)
+            crawler.signals.connect(spider.spider_closed, signals.spider_closed)
+            return spider
+            
+        # def spider_opened(self, spider):
+
+        def spider_closed(self, spider):
+            LastCrawl.objects.filter(spider_name="brooklynmuseumamerican").update(last_crawled=today)
+

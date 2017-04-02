@@ -15,7 +15,7 @@ from w3lib.html import remove_tags
 
 if LastCrawl.objects.get(spider_name="whitney").last_crawled != today:
 
-    class MetSpider(Spider):
+    class WhitneySpider(Spider):
         name = "whitney"
         allowed_domains = ["http://collection.whitney.org/"]
         start_urls = [
@@ -151,7 +151,19 @@ if LastCrawl.objects.get(spider_name="whitney").last_crawled != today:
                             start_date = start_date,
                             end_date = end_date,
                         )
+
                 except:
                     continue
 
-    LastCrawl.objects.filter(spider_name="whitney").update(last_crawled=today)
+        @classmethod
+        def from_crawler(cls, crawler, *args, **kwargs):
+            spider = super(WhitneySpider, cls).from_crawler(crawler, *args, **kwargs)
+            # crawler.signals.connect(spider.spider_opened, signals.spider_opened)
+            crawler.signals.connect(spider.spider_closed, signals.spider_closed)
+            return spider
+            
+        # def spider_opened(self, spider):
+
+        def spider_closed(self, spider):
+            LastCrawl.objects.filter(spider_name="brooklynmuseumamerican").update(last_crawled=today)
+

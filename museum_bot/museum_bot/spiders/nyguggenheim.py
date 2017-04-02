@@ -10,6 +10,7 @@ from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import strip_parenthesis, cleanhtml
 from app.tools import remove_accents, today, yesterday
 from app.models import Artwork, Artist, Collection, NameVariant, Display, LastCrawl
+from scrapy import signals
 
 if LastCrawl.objects.get(spider_name="nyguggenheim").last_crawled != today:
 

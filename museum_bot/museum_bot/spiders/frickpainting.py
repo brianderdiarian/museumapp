@@ -9,6 +9,7 @@ from scrapy.spiders import Spider
 from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import remove_accents, yesterday, today, skipcatch
 from app.models import Artwork, Artist, Collection, NameVariant, Display, LastCrawl
+from scrapy import signals
 
 if LastCrawl.objects.get(spider_name="frickpainting").last_crawled != today:
 
@@ -145,7 +146,7 @@ if LastCrawl.objects.get(spider_name="frickpainting").last_crawled != today:
             # crawler.signals.connect(spider.spider_opened, signals.spider_opened)
             crawler.signals.connect(spider.spider_closed, signals.spider_closed)
             return spider
-            
+
         # def spider_opened(self, spider):
 
         def spider_closed(self, spider):

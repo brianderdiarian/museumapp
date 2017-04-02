@@ -11,6 +11,7 @@ from museum_bot.items import ArtworkItem, DisplayItem, ArtistItem
 from app.tools import strip_parenthesis
 from app.tools import remove_accents, yesterday, today
 from w3lib.html import remove_tags
+from scrapy import signals
 
 if LastCrawl.objects.get(spider_name="meteuropainting").last_crawled != today:
 

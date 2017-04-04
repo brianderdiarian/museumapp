@@ -55,13 +55,13 @@ Logs the last run date for each spider. In turn, the spiders are run twice daily
 
 To do list:
 -
-### Establish a users app in which users can:
+#### Establish a users app in which users can:
 * Favorite artists in order to recieve updates about newly displayed artworks
 * Check-off artworks that they have already viewed
 * Favorite artworks that they intend to view
 * Comment on artworks
 * Share all of this with friends
 
-### Speed up the HTTP response time
+#### Speed up the HTTP response time
 
-### Make an "Exhibitions" model that represents current and upcoming exhibitions, along with the artists included.
+#### Make an "Exhibitions" model that represents current and upcoming exhibitions, along with the artists included.

@@ -65,3 +65,5 @@ To do list:
 #### Speed up the HTTP response time.
 
 #### Make an "Exhibitions" model that represents current and upcoming exhibitions, along with the artists included.
+
+#### Add national collections and allow for region based searches.

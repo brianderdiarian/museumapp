@@ -66,4 +66,4 @@ To do list:
 
 #### Make an "Exhibitions" model that represents current and upcoming exhibitions, along with the artists included.
 
-#### Add national collections and allow for region based searches.
+#### Add national collections and allow for region based or location based searches.

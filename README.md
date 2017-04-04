@@ -28,7 +28,7 @@ Artworks are comprised of:
 * "imageurl"
 * "timestamp" (When the artwork was initially scraped)
 
-### Artist
+### Artists
 Artists are comprised of:
 * "artist_sans_accents" (The artists name with all diacritics removed)
 * "movements"

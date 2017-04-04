@@ -2,7 +2,7 @@ artnewgo.com
 =
 A searchable index of artworks on view in New York City (and, eventually, beyond)
 -
-Artnewgo is a Python web application, utilizing the Django framework, that employs Scrapy spiders to retrieve relevant data and the viewing status of artworks in major museums and collections. This data is relayed to a PostgreSQL database comprising of 11 relational tables. This data is made available to web traffic via dynamic dropdown menus and an Elasticsearch search index.
+Artnewgo is a Python web application, utilizing the Django framework, that employs Scrapy spiders to retrieve relevant data and the viewing status of artworks in major museums and collections. This data is relayed to a PostgreSQL database comprising of 11 relational tables. This data is made available to web traffic via dynamic dropdown menus and an ElasticSearch search index.
 
 Database
 -

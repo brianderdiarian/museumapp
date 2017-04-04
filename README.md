@@ -8,12 +8,52 @@ Database
 -
 The database relations are established in the following manner:
 
+* displays
+  * collections
+    * collection Name
+    * address
+    * description
+  * artworks
+    * artists
+      * artist_sans_accents
+      * sex
+      * born
+      * died
+      * new_nationality
+        * nationality
+        * nation
+      * movements
+        * movement
+        * description
+      * description
+    * title
+    * date
+    * medium
+    * description
+    * pageurl
+    * accession_number
+    * imageurl
+    * timestamp
+  * start_date
+  * end_date
+
+* name_variants
+  * artist
+  * name (variation)
+  
+* last crawls
+  * spider_name
+  * last_crawled
+      
+  
+ 
+
 ### Displays
 Displays are comprised of:
-* "start_date" (When the artwork was first displayed)
-* "end_date" (When the artwork is known to be removed from display)
 * "collection" (Collection in which the artwork is diplayed)
 * "artwork"
+* "start_date" (When the artwork was first displayed)
+* "end_date" (When the artwork is known to be removed from display)
 
 ### Artworks
 Artworks are comprised of:
@@ -31,7 +71,6 @@ Artworks are comprised of:
 ### Artists
 Artists are comprised of:
 * "artist_sans_accents" (The artists name with all diacritics removed)
-* "movements"
 * "nationality" (Deprecated. see "new_nationality")
 * "sex" ("gender" would have been a better word)
 * "born"

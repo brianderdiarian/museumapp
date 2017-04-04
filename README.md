@@ -62,6 +62,6 @@ To do list:
 * Comment on artworks
 * Share all of this with friends
 
-#### Speed up the HTTP response time
+#### Speed up the HTTP response time.
 
 #### Make an "Exhibitions" model that represents current and upcoming exhibitions, along with the artists included.

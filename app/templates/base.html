@@ -58,9 +58,9 @@
                 				<li>
 	                    			{% for collection in collections %}
 	                            		{% if collection.collection_name == "MoMA" %}
-	                            			<a href="/collection/{{ collection.id }}">{{ collection }}</a>
+	                            			<a href="/collection/{{ collection.id }}">{{ collection.collection_name }}</a>
 	                            		{% else %}
-	                            			<a href="/collection/{{ collection.id }}">{{ collection|title }}</a>
+	                            			<a href="/collection/{{ collection.id }}">{{ collection.collection_name|title }}</a>
 	                            		{% endif %}
 	                        		{% endfor %}
 	                        	</li>
@@ -71,7 +71,7 @@
                     		<ul class="dropdown-menu">                       		
                         		<li>
                         			{% for movement in movements %}
-                            		<a href="/movement/{{ movement.id }}">{{ movement }}</a>
+                            		<a href="/movement/{{ movement.id }}">{{ movement.movement }}</a>
                         			{% endfor %}
                         		</li>                       
                 			</ul>
@@ -81,7 +81,7 @@
                     		<ul class="dropdown-menu">	
                         		<li>
                         			{% for artist in artists %}
-                            		<a href="/artist/{{ artist.id }}">{{ artist|truncatechars:30 }}</a>
+                            		<a href="/artist/{{ artist.id }}">{{ artist.artist_sans_accents|truncatechars:30 }}</a>
                         			{% endfor %}
                         		</li>
                 			</ul>

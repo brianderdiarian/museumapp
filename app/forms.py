@@ -1,5 +1,4 @@
 from django import forms
-# from datetime import date, timedelta
 
 import haystack
 from haystack.forms import SearchForm

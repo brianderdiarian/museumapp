@@ -15,4 +15,4 @@ class DisplayIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
     # Used when the entire index for model is updated
-    return self.get_model().objects.filter(start_date__lte=today).filter(end_date__gte=today)
+        return self.get_model().objects.filter(start_date__lte=today).filter(end_date__gte=today)

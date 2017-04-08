@@ -106,3 +106,8 @@ To do list:
 3. Make an "Exhibitions" model that represents current and upcoming exhibitions, along with the artists included.
 
 4. Add national collections and allow for region based or location based searches.
+
+Special thanks to:
+-
+* The New Boston Django Tutorial: https://www.youtube.com/watch?v=qgGIqRFvFFk
+* Python Crash Course by Eric Matthes

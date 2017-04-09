@@ -20,20 +20,60 @@ body {
     padding-bottom: 50px;
 }
 
-.thumbnail {
+#exhibition {
 	/*background-color: rgba(255,255,255,0.7);*/
+    box-shadow: inset 0 0 6pt 2pt #777;
 	width: 240px;
 	height: 580px;
 	border: none;
-	padding:30px;
-    padding-top: 30px;
+	padding:15px;
+    padding-top: 20px;
     overflow: hidden;
 	float: left;
 	display: inline-block;
     *display: inline;
 	margin: 20px 20px 20px 20px;
 	border-radius: 10px;
-	border: 3px solid #ededed;
+	border: 3px solid #000000;
+    text-align: left;
+    background: rgba(150,150,150,0.7); /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#8E8E8E, rgba(150,150,150,0.7)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#8E8E8E, rgba(150,150,150,0.7)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#8E8E8E, rgba(150,150,150,0.7)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#8E8E8E, rgba(150,150,150,0.7)); /* Standard syntax */
+}
+
+#exhibition li, #exhibition-description  {
+    color: #000;
+}
+
+#exhibition-title, #exhibition-collection {
+    color: #fff;
+}
+
+#exhibition .caption {
+    padding: 15px;
+}
+
+#exhibition img {
+    max-height: 200px;
+    box-shadow: 0 0 4pt 2pt #666;
+}
+
+#artwork {
+    /*background-color: rgba(255,255,255,0.7);*/
+    width: 240px;
+    height: 580px;
+    border: none;
+    padding:15px;
+    padding-top: 20px;
+    overflow: hidden;
+    float: left;
+    display: inline-block;
+    *display: inline;
+    margin: 20px 20px 20px 20px;
+    border-radius: 10px;
+    border: 3px solid #ededed;
     text-align: left;
     background: rgba(255,255,255,0.7); /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(white, rgba(255,255,255,0.5)); /* For Safari 5.1 to 6.0 */
@@ -42,9 +82,12 @@ body {
     background: linear-gradient(white, rgba(255,255,255,0.5)); /* Standard syntax */
 }
 
-.thumbnail img {
-	max-height: 200px;
+#artwork img {
+    max-height: 200px;
+    box-shadow: 0 0 4pt 2pt #b8b8b8;
 }
+
+
 
 a:hover {
 	text-decoration: none;
@@ -102,6 +145,12 @@ table, tr {
 	font-size: 15px;
 	font-family: serif;
 	font-weight: bold;
+}
+
+.onviewloc-exhibit {
+    color: #ffffff;
+    font-size: 15px;
+    font-family: serif;
 }
 		
 input[type=search] {

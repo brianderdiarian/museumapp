@@ -2,12 +2,17 @@ from django.contrib import admin
 
 # Register your models here.
 #from django.contrib import admin
-from app.models import Artwork, Artist, Collection, Display, NameVariant, Movement, Ethnicity, Nationality, Info, LastCrawl
+from app.models import Artwork, Artist, Collection, Display, NameVariant, Movement, Ethnicity, Nationality, Info, LastCrawl, Exhibition
 
 class ArtworkAdmin(admin.ModelAdmin):
 	list_display = ('artist', 'title', 'collection', 'timestamp',)
 	ordering = ('artist',)
 admin.site.register(Artwork, ArtworkAdmin)
+
+class ExhibitionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'collection', 'timestamp',)
+    ordering = ('title',)
+admin.site.register(Exhibition, ExhibitionAdmin)
 
 class ArtistAdmin(admin.ModelAdmin):
  	list_display = ('artist_sans_accents', 'artist', 'sex', 'movements', 'get_movements',)
@@ -23,12 +28,7 @@ admin.site.register(Collection, CollectionAdmin)
 
 class DisplayAdmin(admin.ModelAdmin):
     model = Display
-    list_display = ('get_artist', 'artwork', 'collection', 'start_date', 'end_date',)
-
-    def get_artist(self, obj):
-        return obj.artwork.artist
-    get_artist.admin_order_field  = 'artwork'  #Allows column order sorting
-    get_artist.short_description = 'Artist'  #Renames column head
+    list_display = ('artwork', 'collection', 'start_date', 'end_date',)
 
     #Filtering on side - for some reason, this works
     #list_filter = ['title', 'author__name']

@@ -15,6 +15,7 @@ urlpatterns = [
 
 	url(r'^$', views.index, name='index'),
 	url(r'^women/$', views.women, name='women'),
+	url(r'^exhibitions/$', views.exhibitions, name='exhibitions'),
 	url(r'^movement/(?P<movement_id>[0-9]+)/$', views.movement, name='movement'),
 	url(r'^collection/(?P<collection_id>[0-9]+)/$', views.collection, name='collection'),
 	url(r'^artist/(?P<artist_id>[0-9]+)/$', views.artist, name='artist'),

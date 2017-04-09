@@ -12,17 +12,35 @@
     <div class="counter">
         <p>Results {{ page.start_index }} - {{ page.end_index }} of {{ page.paginator.count }}</p>
     </div>
-    <br>
-        
+    <br>     
         {% if query or page.object_list %}
-
             {% for result in page.object_list %}
+                    {% if result.object.exhibition %}
+                    <div class="thumbnail" id="exhibition">
+                        <a href ="{{result.object.exhibition.pageurl}}" target="_blank">
 
-                    <div class="thumbnail">
-                        
+                            <img src="{{result.object.exhibition.imageurl}}" style="border:1px solid #000;" alt="{{ result.object.exhibition.title|truncatechars:45 }}">
+                            <div class="caption">
+                                <h4 id="exhibition-title"><i>{{result.object.exhibition.title|truncatechars:45}}</i></h4>
+                                <div class="thumb_body">
+                                    <ul id="thumb-info-list">
+                                        {% for artist in result.object.exhibition.artist.all %}
+                                            <li><b>{{artist|truncatechars:45}}</b></li>
+                                        {% endfor %}
+                                    </ul>
+                                    <p id="exhibition-description">{{result.object.exhibition.description|truncatechars:150}}</p>
+                                    <div class="onviewloc-exhibit">
+                                        <p id="exhibition-collection">Current exhibition at <b>{{result.object.exhibition.collection}}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endif %}
+                    {% if result.object.artwork %}
+                    <div class="thumbnail" id="artwork">  
                         <a href ="{{result.object.artwork.pageurl}}" target="_blank">
-                            <img src="{{result.object.artwork.imageurl}}" style="border:1px solid gray;" alt="{{ display.artwork.title|truncatechars:45 }}">
-                        
+                            <img src="{{result.object.artwork.imageurl}}" style="border:1px solid gray;" alt="{{ display.artwork.title|truncatechars:45 }}">                        
                             <div class="caption">
                                 <h3>{{result.object.artwork.artist}}</h3>
                                 <div class="thumb_body">
@@ -40,9 +58,8 @@
                                 </div>
                             </div>
                         </a>
-                       
-                    </div>
-                
+                    </div> 
+                    {% endif %}               
             {% empty %}
                 <div class="noresults"><h3>No results found.</h><div>
             {% endfor %}

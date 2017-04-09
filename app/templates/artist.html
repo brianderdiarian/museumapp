@@ -64,7 +64,7 @@
 
     {% for display in displays %}
 
-        <div class="thumbnail">
+        <div class="thumbnail" id="artwork">
                                 
              <a href ="{{display.pageurl}}" target="_blank">
                 <img src="{{display.imageurl}}" style="border:1px solid gray;" alt="{{ display.title|truncatechars:45 }}">

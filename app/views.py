@@ -6,13 +6,13 @@ from haystack.query import SearchQuerySet
 from haystack.generic_views import SearchView
 from django.conf import settings
 from django.http import HttpResponse
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from datetime import date, timedelta
 
 from random import randint
-from .models import Artwork, Display, Movement, Artist, Collection, Info, Nationality
-from .tools import current, yesterday, today#, mlist, artist_by_movement
+from .models import Artwork, Display, Movement, Artist, Collection, Info, Nationality, Exhibition
+from .tools import current, yesterday, today
 
 from .forms import ContactForm
 from django.core.mail import EmailMessage
@@ -22,21 +22,14 @@ from django.template.loader import get_template
 
 EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 
-# yester = current - timedelta(1)
-
 def index(request):
-    #artists = Artwork.objects.filter(timestamp__gte=current).order_by('?')[:12]
-    displays = Artwork.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().exclude(imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").order_by('-display__start_date')[:12]
-    context={'displays': displays}
+    artworks = Artwork.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().exclude(imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").order_by('-display__start_date')[:12]
+    exhibitions = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('display__start_date')[:4]
+    context={
+    	'artworks': artworks,
+    	'exhibitions': exhibitions,
+    }
     return render(request, 'index.html', context)
-
-# def new(request):
-# 	old = Artwork.objects.filter(timestamp=yester).values_list('accession_number', flat=True)
-# 	new = Artwork.objects.filter(timestamp=current)
-
-# 	context = { 'old': yesterday,
-# 				'today': today }
-# 	return render(request, 'new.html', context)
 
 def women(request):
 	femaleArtists_list = Artwork.objects.filter(artist__sex="Female").filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().order_by('artist__artist_sans_accents')
@@ -58,7 +51,7 @@ def women(request):
 	return render(request, 'women.html', context)
 
 def movement(request, movement_id):
-	displays = Artwork.objects.filter(artist__movement__id=movement_id).filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().order_by('artist__artist_sans_accents')
+	displays = Display.objects.filter(Q(artwork__artist__movement=movement_id)| Q(exhibition__artist__movement=movement_id)).filter(end_date__gte=today).filter(start_date__lte=today).order_by('-id')
 	movement = Movement.objects.get(id=movement_id)
 	paginator = Paginator(displays, 24)
 
@@ -98,7 +91,7 @@ def artist(request, artist_id):
 	return render(request, 'artist.html', context)
 
 def collection(request, collection_id):
-	displays = Artwork.objects.filter(display__collection__id=collection_id).filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().order_by('artist__artist_sans_accents')
+	displays = Display.objects.filter(collection=collection_id).filter(end_date__gte=today).filter(start_date__lte=today).order_by('-id')
 	collection = Collection.objects.get(id=collection_id)
 	paginator = Paginator(displays, 24)
 
@@ -168,27 +161,22 @@ def contact(request):
 			return redirect('/')
 
 	return render(request, 'contact.html', {'form': form_class, })
+def exhibitions(request):
+	displays = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().order_by('display__start_date')
+	paginator = Paginator(displays, 24)
 
-# def stats(request):
-# 	male = Artwork.objects.filter(artist__sex__contains="Male").filter(display__end_date__gte=today).count()
-# 	female = Artwork.objects.filter(artist__sex__contains="Female").filter(display__end_date__gte=today).count()
-# 	unknown = Artwork.objects.filter(artist__sex="").filter(display__end_date__gte=today).count()
-	
+	try:
+		page = int(request.GET.get('page', '1'))
+	except:
+		page = 1
 
-# 	nationality = Nationality.objects.all().values('nation').annotate(Count("artist"))
-# 	nationality = list(nationality)
+	try:
+		displays = paginator.page(page)
+	except(EmptyPage, InvalidPage):
+		displays = paginator.page(paginator.num_pages)
 
-# 	movement_tally = Artwork.objects.filter(display__collection=4).values('artist__movement__movement').annotate(Count('artist')).order_by('artist__movement__movement')
-# 	movement_tally = list(movement_tally)
+	context = { 'displays': displays}
 
-# 	context = {
-# 		'male': male,
-# 		'female': female,
-# 		'unknown': unknown,
-# 		'nationality': nationality,
-# 		'movement_tally': movement_tally,
-# 		}
-
-# 	return render(request, 'stats.html', context)
+	return render(request, 'exhibitions.html', context)
 
 

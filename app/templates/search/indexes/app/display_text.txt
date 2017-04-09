@@ -10,4 +10,6 @@
 {{ object.collection }}
 {{ object.end_date }}
 {{ object.start_date }}
+{{ object.exhibition.artist|safe }}
+{{ object.exhibition.title|safe }}
 

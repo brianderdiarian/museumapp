@@ -14,38 +14,62 @@
     </form>
     <br>
     <br>
-{% if displays %}
-    {% for display in displays %}
-        <div class="thumbnail">
-            <a href ="{{display.pageurl}}" target="_blank">
-                <img src="{{display.imageurl}}" style="border:1px solid gray;" alt="{{ display.title|truncatechars:45 }}">
+    {% if exhibitions %}
+        {% for exhibition in exhibitions %}
+        <div class="thumbnail" id="exhibition">
+            <a href ="{{exhibition.pageurl}}" target="_blank">
+
+                <img src="{{exhibition.imageurl}}" style="border:1px solid #000;" alt="{{ exhibition.title|truncatechars:45 }}">
                 <div class="caption">
-                    <h3>{{display.artist|truncatechars:45}}</h3>
+                    <h4 id="exhibition-title"><i>{{exhibition.title|truncatechars:45}}</i></h4>
                     <div class="thumb_body">
                         <ul id="thumb-info-list">
-                            <li><b><i>{{display.title|truncatechars:45}}</i></b></li>
-                            {% if display.date is not None %}
-                              <li>{{ display.date }}</li>
+                            {% for artist in exhibition.artist.all %}
+                                <li><b>{{artist|truncatechars:45}}</b></li>
+                            {% endfor %}
+                        </ul>
+                        <p>{{exhibition.description|truncatechars:150}}</p>
+                        <div class="onviewloc-exhibit">
+                            <p id="exhibition-collection">Current exhibition at <b>{{exhibition.collection}}</b></p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    {% endif %}
+    {% if artworks %}
+        {% for artwork in artworks %}
+        <div class="thumbnail" id="artwork">
+            <a href ="{{artwork.pageurl}}" target="_blank">
+                <img src="{{artwork.imageurl}}" style="border:1px solid gray;" alt="{{ artwork.title|truncatechars:45 }}">
+                <div class="caption">
+                    <h3>{{artwork.artist|truncatechars:45}}</h3>
+                    <div class="thumb_body">
+                        <ul id="thumb-info-list">
+                            <li><b><i>{{artwork.title|truncatechars:45}}</i></b></li>
+                            {% if artwork.date is not None %}
+                              <li>{{ artwork.date }}</li>
                             {% endif %}
-                            <li>{{display.medium|truncatechars:45}}</li>
+                            <li>{{artwork.medium|truncatechars:45}}</li>
                         </ul>
                         <div class="onviewloc">
-                            <p>On view at {{display.collection}}</p>
+                            <p>On view at {{artwork.collection}}</p>
                         </div>
                         <div class="artist-link">
-                            <p><a href="/artist/{{display.artist.id}}">More of<br>{{display.artist}} >></a></p>
+                            <p><a href="/artist/{{artwork.artist.id}}">More of<br>{{artwork.artist}} >></a></p>
                         </div>
                         <div class="movement-link">
-                            {% for m in display.artist.movement.all %}
+                            {% for m in artwork.artist.movement.all %}
                             <a href="/movement/{{ m.id }}">{{ m.movement }} >></a>
                             {% endfor %}
                         </div>
                     </div>
                 </div>
             </a>
-        </div>   
-    {% endfor %}
-{% endif %}
+        </div>
+        {% endfor %}
+    {% endif %} 
 
 
 {% endblock content %}

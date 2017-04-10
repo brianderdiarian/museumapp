@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+    <form class="search" action="/search/" method="get">
+        <input type="search" name="q">
+        <input type="submit" value="Search">
+    </form>
+    <br>
+        <div class="counter">
+            <p>Results {{ displays.start_index }} - {{ displays.end_index }} of {{ displays.paginator.count }}</p>
+        </div>
+    <br>
+
+{% if displays %}
+        {% for display in displays %}
+        <div class="thumbnail" id="exhibition">
+            <a href ="{{display.pageurl}}" target="_blank">
+
+                <img src="{{display.imageurl}}" style="border:1px solid #000;" alt="{{ display.title|truncatechars:45 }}">
+                <div class="caption">
+                    <h4 id="exhibition-title"><i>{{display.title|truncatechars:45}}</i></h4>
+                    <div class="thumb_body">
+                        <ul id="thumb-info-list">
+                            {% for artist in display.artist.all %}
+                                <li><b>{{artist|truncatechars:45}}</b></li>
+                            {% endfor %}
+                        </ul>
+                        <p id="exhibition-description">{{display.description|truncatechars:100}}</p>
+                        <div class="onviewloc-exhibit">
+                            <p id="exhibition-collection">Current exhibition at <b>{{display.collection}}</b></p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+
+    <div class="prevnext">
+    {% if display.has_previous %}
+            {% if display.has_previous %}
+                <a href="?q={{ query }}&amp;page={{ display.previous_page_number }}">
+                    <button type="button" class="btn btn-default"><< Previous</button>
+                </a>
+            {% endif %}
+    {% endif %}
+    {% if display.has_next %}
+            {% if display.has_next %}
+                <a href="?q={{ query }}&amp;page={{ display.next_page_number }}">
+                    <button type="button" class="btn btn-default">Next >></button>
+                </a>
+            {% endif %}
+    {% endif %}
+    </div>
+{% endif %}
+
+
+{% endblock content %}

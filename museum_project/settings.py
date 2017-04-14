@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'haystack',
     'storages',
+    'debug_toolbar'
 ]
 
 INSTALLED_APPS += ('app',)
@@ -73,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 ROOT_URLCONF = 'museum_project.urls'
@@ -96,6 +98,8 @@ TEMPLATES = [
 TEMPLATES[0]['OPTIONS']['context_processors'].append("app.context_processors.movement_processor")
 
 WSGI_APPLICATION = 'museum_project.wsgi.application'
+
+INTERNAL_IPS = '127.0.0.1'
 
 
 # Database

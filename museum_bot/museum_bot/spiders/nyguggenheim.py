@@ -19,6 +19,7 @@ if LastCrawl.objects.get(spider_name="nyguggenheim").last_crawled != today:
         allowed_domains = ["guggenheim.org"]
         start_urls = [
             'https://www.guggenheim.org/wp-json/wp/v2/artwork?filter%5Bcategory_name%5D=on-view-in-new-york&per_page=100',
+            'https://www.guggenheim.org/wp-json/wp/v2/artwork?filter%5Bcategory_name%5D=on-view-in-new-york&page=2&per_page=100',
         ]
 
         def parse(self, response):

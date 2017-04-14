@@ -23,8 +23,8 @@ from django.template.loader import get_template
 EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 
 def index(request):
-    artworks = Artwork.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().exclude(imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").prefetch_related().order_by('-display__start_date')[:12]
-    exhibitions = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).prefetch_related().order_by('display__start_date')[:4]
+    artworks = Artwork.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().exclude(imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").order_by('-display__start_date')[:12]
+    exhibitions = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('display__start_date')[:4]
     context={
     	'artworks': artworks,
     	'exhibitions': exhibitions,
@@ -51,7 +51,7 @@ def women(request):
 	return render(request, 'women.html', context)
 
 def movement(request, movement_id):
-	displays = Display.objects.filter(Q(artwork__artist__movement=movement_id)| Q(exhibition__artist__movement=movement_id)).filter(end_date__gte=today).filter(start_date__lte=today).prefetch_related().order_by('-id')
+	displays = Display.objects.filter(Q(artwork__artist__movement=movement_id)| Q(exhibition__artist__movement=movement_id)).filter(end_date__gte=today).filter(start_date__lte=today).order_by('exhibition','artwork__artist').distinct()
 	movement = Movement.objects.get(id=movement_id)
 	paginator = Paginator(displays, 24)
 
@@ -71,7 +71,7 @@ def movement(request, movement_id):
 	return render(request, 'movement.html', context)
 
 def artist(request, artist_id):
-	displays = Artwork.objects.filter(artist__id=artist_id).filter(display__end_date__gte=today).filter(display__start_date__lte=today).prefetch_related.distinct()
+	displays = Artwork.objects.filter(artist__id=artist_id).filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('exhibition','artwork__artist').distinct()
 	artist = Artist.objects.get(id=artist_id)
 	paginator = Paginator(displays, 24)
 
@@ -91,7 +91,7 @@ def artist(request, artist_id):
 	return render(request, 'artist.html', context)
 
 def collection(request, collection_id):
-	displays = Display.objects.filter(collection=collection_id).filter(end_date__gte=today).filter(start_date__lte=today).prefetch_related().order_by('-id')
+	displays = Display.objects.filter(collection=collection_id).filter(end_date__gte=today).filter(start_date__lte=today).order_by('exhibition','artwork__artist').distinct()
 	collection = Collection.objects.get(id=collection_id)
 	paginator = Paginator(displays, 24)
 
@@ -162,7 +162,7 @@ def contact(request):
 
 	return render(request, 'contact.html', {'form': form_class, })
 def exhibitions(request):
-	displays = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().prefetch_related().order_by('display__start_date')
+	displays = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().order_by('display__start_date')
 	paginator = Paginator(displays, 24)
 
 	try:

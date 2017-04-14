@@ -1,7 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
-#from django.contrib import admin
 from app.models import Artwork, Artist, Collection, Display, NameVariant, Movement, Ethnicity, Nationality, Info, LastCrawl, Exhibition
 
 class ArtworkAdmin(admin.ModelAdmin):
@@ -22,17 +19,9 @@ class CollectionAdmin(admin.ModelAdmin):
  	list_display = ('collection_name',)
 admin.site.register(Collection, CollectionAdmin)
 
-# class DisplayAdmin(admin.ModelAdmin):
-#  	list_display = ('artwork', 'collection', 'start_date', 'end_date',)
-# admin.site.register(Display, DisplayAdmin)
-
 class DisplayAdmin(admin.ModelAdmin):
     model = Display
     list_display = ('artwork', 'collection', 'start_date', 'end_date',)
-
-    #Filtering on side - for some reason, this works
-    #list_filter = ['title', 'author__name']
-
 admin.site.register(Display, DisplayAdmin)
 
 class NameVarientAdmin(admin.ModelAdmin):

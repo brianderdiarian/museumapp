@@ -38,7 +38,6 @@
         </div>
         {% endfor %}
     {% endif %}
-    {% if artworks %}
         {% for artwork in artworks %}
         <div class="thumbnail" id="artwork">
             <a href ="{{artwork.pageurl}}" target="_blank">
@@ -69,7 +68,6 @@
             </a>
         </div>
         {% endfor %}
-    {% endif %} 
 
 
 {% endblock content %}

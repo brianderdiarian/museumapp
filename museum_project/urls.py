@@ -22,3 +22,9 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('app.urls', namespace='app')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

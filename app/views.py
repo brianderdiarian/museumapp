@@ -71,7 +71,7 @@ def movement(request, movement_id):
 	return render(request, 'movement.html', context)
 
 def artist(request, artist_id):
-	displays = Artwork.objects.filter(artist__id=artist_id).filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('exhibition','artwork__artist').distinct()
+	displays = Artwork.objects.filter(artist__id=artist_id).filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('artist').distinct()
 	artist = Artist.objects.get(id=artist_id)
 	paginator = Paginator(displays, 24)
 

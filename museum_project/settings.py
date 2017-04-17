@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
+    'app',
     # Third Party Apps
     'bootstrap3',
     'haystack',
@@ -74,7 +75,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.linkedin_oauth2',
 ]
 
-INSTALLED_APPS += ('app',)
+# INSTALLED_APPS += ('app',)
 
 SITE_ID = 1
 

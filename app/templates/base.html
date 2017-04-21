@@ -113,5 +113,24 @@
 			</div>
 			<div id="footer">Copyright © artnewgo 2017</div>
 		</div> <!-- /container -->
+		<script type="text/javascript">
+	        $('.favartistbutton').click(function(){
+	        var catid;
+	        catid = $(this).attr("data-catid");
+	        $.ajax(
+	        {
+	            type:"GET",
+	            url: "/favartist",
+	            data:{
+	                     artist_id: catid
+	            },
+	            success: function( data ) 
+	            {
+	                $( '#favartist'+ catid ).remove();
+	                $( '#message' ).text(data);
+	            }
+	         })
+	    });
+	    </script>
 	</body>
 </html>

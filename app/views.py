@@ -26,8 +26,10 @@ EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 def index(request):
     artworks = Artwork.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().exclude(imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").order_by('-display__start_date')[:12]
     exhibitions = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('display__start_date')[:4]
+    
     user = request.user.id
     favoriteartists = FavoriteArtist.objects.filter(user=user).values_list('artist_id', flat=True)
+    
     context={
     	'artworks': artworks,
     	'exhibitions': exhibitions,
@@ -40,6 +42,9 @@ def women(request):
 	femaleArtists_list = Artwork.objects.filter(artist__sex="Female").filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().prefetch_related().order_by('artist__artist_sans_accents')
 	paginator = Paginator(femaleArtists_list, 24)
 
+	user = request.user.id
+	favoriteartists = FavoriteArtist.objects.filter(user=user).values_list('artist_id', flat=True)
+
 	try:
 		page = int(request.GET.get('page', '1'))
 	except:
@@ -51,7 +56,9 @@ def women(request):
 		femaleArtists = paginator.page(paginator.num_pages)
 
 
-	context = { 'femaleArtists': femaleArtists}
+	context = { 'femaleArtists': femaleArtists,
+				'user': user,
+				'favoriteartists': favoriteartists, }
 
 	return render(request, 'women.html', context)
 
@@ -60,6 +67,9 @@ def movement(request, movement_id):
 	movement = Movement.objects.get(id=movement_id)
 	paginator = Paginator(displays, 24)
 
+	user = request.user.id
+	favoriteartists = FavoriteArtist.objects.filter(user=user).values_list('artist_id', flat=True)
+
 	try:
 		page = int(request.GET.get('page', '1'))
 	except:
@@ -71,7 +81,9 @@ def movement(request, movement_id):
 		displays = paginator.page(paginator.num_pages)
 
 	context = { 'displays': displays,
-				'movement': movement, }
+				'movement': movement,
+				'user': user,
+				'favoriteartists': favoriteartists, }
 
 	return render(request, 'movement.html', context)
 
@@ -80,6 +92,9 @@ def artist(request, artist_id):
 	artist = Artist.objects.get(id=artist_id)
 	paginator = Paginator(displays, 24)
 
+	user = request.user.id
+	favoriteartists = FavoriteArtist.objects.filter(user=user).values_list('artist_id', flat=True)
+
 	try:
 		page = int(request.GET.get('page', '1'))
 	except:
@@ -91,7 +106,9 @@ def artist(request, artist_id):
 		displays = paginator.page(paginator.num_pages)
 
 	context = { 'displays': displays,
-				'artist': artist, }
+				'artist': artist, 
+				'user': user,
+				'favoriteartists': favoriteartists, }
 
 	return render(request, 'artist.html', context)
 
@@ -99,6 +116,9 @@ def collection(request, collection_id):
 	displays = Display.objects.filter(collection=collection_id).filter(end_date__gte=today).filter(start_date__lte=today).order_by('exhibition','artwork__artist').distinct()
 	collection = Collection.objects.get(id=collection_id)
 	paginator = Paginator(displays, 24)
+
+	user = request.user.id
+	favoriteartists = FavoriteArtist.objects.filter(user=user).values_list('artist_id', flat=True)
 
 	try:
 		page = int(request.GET.get('page', '1'))
@@ -122,7 +142,8 @@ def collection(request, collection_id):
 				'male': male,
 				'female': female,
 				'unknown': unknown,
-
+				'user': user,
+				'favoriteartists': favoriteartists,
 				}
 
 	return render(request, 'collection.html', context)

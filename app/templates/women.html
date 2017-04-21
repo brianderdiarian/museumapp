@@ -38,6 +38,12 @@
                         <div class="artist-link">
                             <a href="/artist/{{display.artist.id}}">More of<br>{{display.artist}} >></a>
                         </div>
+                        {% if user %}
+                            {% if display.artist.id not in favoriteartists %}
+                                <a href = "javascript:void(0)" class="btn btn-xs btn-success favartistbutton" id="favartist{{display.artist.id}}" data-catid="{{ display.artist.id }}"><span class="glyphicon glyphicon-plus"></span> Favorite Artist</a>
+                            {% else %}
+                            {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </a>

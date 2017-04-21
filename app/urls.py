@@ -26,4 +26,5 @@ urlpatterns = [
 	), name='haystack_search'),
 	url(r'^about/$', views.about, name='about'),
 	url(r'^contact/$', views.contact, name='contact'),
+	url(r'^favartist/$', views.favArtist, name='favartist'),   # likepost view at /likepost
 ]

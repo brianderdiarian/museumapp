@@ -38,36 +38,61 @@
         </div>
         {% endfor %}
     {% endif %}
-        {% for artwork in artworks %}
-        <div class="thumbnail" id="artwork">
-            <a href ="{{artwork.pageurl}}" target="_blank">
-                <img src="{{artwork.imageurl}}" style="border:1px solid gray;" alt="{{ artwork.title|truncatechars:45 }}">
-                <div class="caption">
-                    <h3>{{artwork.artist|truncatechars:45}}</h3>
-                    <div class="thumb_body">
-                        <ul id="thumb-info-list">
-                            <li><b><i>{{artwork.title|truncatechars:45}}</i></b></li>
-                            {% if artwork.date is not None %}
-                              <li>{{ artwork.date }}</li>
-                            {% endif %}
-                            <li>{{artwork.medium|truncatechars:45}}</li>
-                        </ul>
-                        <div class="onviewloc">
-                            <p>On view at {{artwork.collection}}</p>
-                        </div>
-                        <div class="artist-link">
-                            <p><a href="/artist/{{artwork.artist.id}}">More of<br>{{artwork.artist}} >></a></p>
-                        </div>
-                        <div class="movement-link">
-                            {% for m in artwork.artist.movement.all %}
-                            <a href="/movement/{{ m.id }}">{{ m.movement }} >></a>
-                            {% endfor %}
-                        </div>
+    {% for artwork in artworks %}
+    <div class="thumbnail" id="artwork">
+        <a href ="{{artwork.pageurl}}" target="_blank">
+            <img src="{{artwork.imageurl}}" style="border:1px solid gray;" alt="{{ artwork.title|truncatechars:45 }}">
+            <div class="caption">
+                <h3>{{artwork.artist|truncatechars:45}}</h3>
+                <div class="thumb_body">
+                    <ul id="thumb-info-list">
+                        <li><b><i>{{artwork.title|truncatechars:45}}</i></b></li>
+                        {% if artwork.date is not None %}
+                          <li>{{ artwork.date }}</li>
+                        {% endif %}
+                        <li>{{artwork.medium|truncatechars:45}}</li>
+                    </ul>
+                    <div class="onviewloc">
+                        <p>On view at {{artwork.collection}}</p>
                     </div>
+                    <div class="artist-link">
+                        <p><a href="/artist/{{artwork.artist.id}}">More of<br>{{artwork.artist}} >></a></p>
+                    </div>
+                    <div class="movement-link">
+                        {% for m in artwork.artist.movement.all %}
+                        <a href="/movement/{{ m.id }}">{{ m.movement }} >></a>
+                        {% endfor %}
+                    </div>
+                    {% if user %}
+                            {% if artwork.artist.id not in favoriteartists %}
+                                <a href = "javascript:void(0)" class="btn btn-xs btn-success favartistbutton" id="favartist{{artwork.artist.id}}" data-catid="{{ artwork.artist.id }}"><span class="glyphicon glyphicon-plus"></span> Favorite Artist</a>
+                            {% else %}
+                            {% endif %}
+                    {% endif %}
                 </div>
-            </a>
-        </div>
-        {% endfor %}
-
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    
+    <script type="text/javascript">
+        $('.favartistbutton').click(function(){
+        var catid;
+        catid = $(this).attr("data-catid");
+        $.ajax(
+        {
+            type:"GET",
+            url: "/favartist",
+            data:{
+                     artist_id: catid
+            },
+            success: function( data ) 
+            {
+                $( '#favartist'+ catid ).remove();
+                $( '#message' ).text(data);
+            }
+         })
+    });
+    </script>
 
 {% endblock content %}

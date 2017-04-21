@@ -30,13 +30,10 @@
 
   			ga('create', 'UA-89877616-1', 'auto');
   			ga('send', 'pageview');
-
 		</script>
-
-		
-		
-
+	
 	</head>
+	
 	<body style="background: url(http://www.moma.org/media/W1siZiIsIjMzOTExNiJdLFsicCIsImNvbnZlcnQiLCItcmVzaXplIDEwMjR4MTAyNFx1MDAzZSJdXQ.jpg?sha=94a84fac9d759655); background-size:100000px; background-position:center; background-attachment: fixed; padding-bottom: 50px;">
 
 		<nav class="navbar navbar-inverse topnavbar">
@@ -89,6 +86,18 @@
 						<li><a href="/women">Women Artists</a></li>
 						<li><a href="/exhibitions" style="color: #ff9156;">Current Exhibitions</a></li>
         			</ul>
+        			<ul class="nav navbar-nav navbar-right">
+						{% if request.user.is_authenticated %}
+    						{% if request.user.first_name or request.user.last_name %}
+        						<li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.first_name }} {{ request.user.last_name }}</a></li>
+    						{% else %}
+        						<li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+    						{% endif %}
+    						<li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+ 						{% else %}
+ 							<li><a href="/accounts/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+ 						{% endif %}
+    				</ul>
         		</div><!--/.nav-collapse -->
 
 			</div>

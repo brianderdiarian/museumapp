@@ -44,8 +44,10 @@ except:
     DEBUG = False
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['artnewgo.com', 'localhost']
 
+#allauth login redirect
+LOGIN_REDIRECT_URL = '/'
 
 # Application definition
 
@@ -74,8 +76,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.linkedin',
     'allauth.socialaccount.providers.linkedin_oauth2',
 ]
-
-# INSTALLED_APPS += ('app',)
 
 SITE_ID = 1
 

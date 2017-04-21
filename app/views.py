@@ -7,11 +7,12 @@ from haystack.generic_views import SearchView
 from django.conf import settings
 from django.http import HttpResponse
 from django.db.models import Count, Q
+from django.contrib.auth.models import User
 
 from datetime import date, timedelta
 
 from random import randint
-from .models import Artwork, Display, Movement, Artist, Collection, Info, Nationality, Exhibition
+from .models import Artwork, Display, Movement, Artist, Collection, Info, Nationality, Exhibition, FavoriteArtist
 from .tools import current, yesterday, today
 
 from .forms import ContactForm
@@ -25,9 +26,13 @@ EMAIL_ADDRESS = os.environ.get('EMAIL_ADDRESS')
 def index(request):
     artworks = Artwork.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).distinct().exclude(imageurl="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg").order_by('-display__start_date')[:12]
     exhibitions = Exhibition.objects.filter(display__end_date__gte=today).filter(display__start_date__lte=today).order_by('display__start_date')[:4]
+    user = request.user.id
+    favoriteartists = FavoriteArtist.objects.filter(user=user).values_list('artist_id', flat=True)
     context={
     	'artworks': artworks,
     	'exhibitions': exhibitions,
+    	'user': user,
+    	'favoriteartists': favoriteartists,
     }
     return render(request, 'index.html', context)
 
@@ -178,5 +183,17 @@ def exhibitions(request):
 	context = { 'displays': displays}
 
 	return render(request, 'exhibitions.html', context)
+
+def favArtist(request):
+    if request.method == 'GET':
+           artist_id = request.GET.get('artist_id')
+           favartist = Artist.objects.get(pk=artist_id) #getting the liked posts
+           userid = request.user.id
+           current_user = User.objects.get(pk=userid)
+           m = FavoriteArtist(artist=favartist, user=current_user) # Creating Like Object
+           m.save()  # saving it to store in database
+           return HttpResponse("Success!") # Sending an success response
+    else:
+           return HttpResponse("Request method is not a GET")
 
 

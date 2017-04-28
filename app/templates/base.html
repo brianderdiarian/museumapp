@@ -89,9 +89,9 @@
         			<ul class="nav navbar-nav navbar-right">
 						{% if request.user.is_authenticated %}
     						{% if request.user.first_name or request.user.last_name %}
-        						<li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.first_name }} {{ request.user.last_name }}</a></li>
+        						<li><a href="/profile"><span class="glyphicon glyphicon-user"></span> {{ request.user.first_name }} {{ request.user.last_name }}</a></li>
     						{% else %}
-        						<li><a href="#"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+        						<li><a href="/profile"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
     						{% endif %}
     						<li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
  						{% else %}
@@ -113,19 +113,21 @@
 			</div>
 			<div id="footer">Copyright © artnewgo 2017</div>
 		</div> <!-- /container -->
+
 		<script type="text/javascript">
 	        $('.favartistbutton').click(function(){
 	        var catid;
-	        catid = $(this).attr("data-catid");
+	        artist_id = $(this).attr("data-catid");
 	        $.ajax(
 	        {
-	            type:"GET",
-	            url: "/favartist",
-	            data:{
-	                     artist_id: catid
+	            type:"POST",
+	            url: "/favartist/",
+	            data : {
+	            	csrfmiddlewaretoken: '{{ csrf_token }}',
+	            	artist_id: artist_id,
 	            },
-	            success: function( data ) 
-	            {
+			    dataType : "json",
+			    success: function( data ){
 	                $( '#favartist'+ catid ).remove();
 	                $( '#message' ).text(data);
 	            }

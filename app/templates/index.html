@@ -65,7 +65,10 @@
                     </div>
                     {% if user %}
                             {% if artwork.artist.id not in favoriteartists %}
-                                <a href = "javascript:void(0)" class="btn btn-xs btn-success favartistbutton" id="favartist{{artwork.artist.id}}" data-catid="{{ artwork.artist.id }}"><span class="glyphicon glyphicon-plus"></span> Favorite Artist</a>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <button class="btn btn-xs btn-success favartistbutton" id="favartist{{artwork.artist.id}}" data-catid="{{ artwork.artist.id }}"><span class="glyphicon glyphicon-plus"></span> Favorite Artist</button>
+                                </form>
                             {% else %}
                             {% endif %}
                     {% endif %}

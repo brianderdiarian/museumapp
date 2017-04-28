@@ -1,4 +1,5 @@
 import os
+import json
 
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, render_to_response
@@ -8,6 +9,7 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.db.models import Count, Q
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 from datetime import date, timedelta
 
@@ -204,17 +206,28 @@ def exhibitions(request):
 	context = { 'displays': displays}
 
 	return render(request, 'exhibitions.html', context)
-
+ 
 def favArtist(request):
-    if request.method == 'GET':
-           artist_id = request.GET.get('artist_id')
-           favartist = Artist.objects.get(pk=artist_id) #getting the liked posts
-           userid = request.user.id
-           current_user = User.objects.get(pk=userid)
-           m = FavoriteArtist(artist=favartist, user=current_user) # Creating Like Object
-           m.save()  # saving it to store in database
-           return HttpResponse("Success!") # Sending an success response
-    else:
-           return HttpResponse("Request method is not a GET")
+	if request.method == 'POST':
+		artist_id = request.POST.get('artist_id')
+		favartist = Artist.objects.get(pk=artist_id) #getting the liked posts
+		userid = request.user.id
+		current_user = User.objects.get(pk=userid)
+		m = FavoriteArtist(artist=favartist, user=current_user) # Creating Like Object
+		m.save()  # saving it to store in database
+		return HttpResponse('')
+
+@login_required
+def profile(request):
+
+	user = request.user.id
+	username = request.user.username
+
+	context = {
+		'user': user,
+		'username': username,
+	}
+
+	return render(request, 'profile.html', context)
 
 

@@ -33,7 +33,7 @@ simplejson==3.8.2
 six==1.10.0
 static3==0.7.0
 Twisted==16.4.0
-urllib3==1.17
+urllib3==1.26.5
 w3lib==1.15.0
 wikipedia==1.4.0
 zope.interface==4.3.1

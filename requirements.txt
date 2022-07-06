@@ -16,7 +16,7 @@ django-storages==1.5.1
 elasticsearch==1.9.0
 gunicorn==19.6.0
 idna==2.1
-lxml==3.6.4
+lxml==4.9.1
 parsel==1.0.3
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
